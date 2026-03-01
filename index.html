@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GuraNeza | BuySmart – Products</title>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body { background: #ffffff; color: #1e1e2f; line-height: 1.5; }
+
+    .sticky-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.9); backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02); border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .nav-container {
+      max-width: 1400px; margin: 0 auto; padding: 0.9rem 2rem;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+    }
+    .logo-area { display: flex; align-items: center; gap: 0.5rem; }
+    .logo-icon { font-size: 1.9rem; color: #1e4a6d; }
+    .logo-text { font-weight: 700; font-size: 1.5rem; letter-spacing: -0.02em; }
+    .logo-text span { color: #1e4a6d; font-weight: 600; }
+
+    .nav-links { display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; }
+    .dropdown { position: relative; display: inline-block; }
+    .dropbtn {
+      background: transparent; border: none; font-size: 1rem; font-weight: 500;
+      color: #1e1e2f; padding: 0.5rem 0; cursor: pointer; display: flex; align-items: center; gap: 0.3rem;
+    }
+    .dropbtn i { font-size: 0.8rem; color: #6b7280; }
+    .dropbtn:hover { color: #1e4a6d; }
+    .dropdown-content {
+      position: absolute; top: 2.2rem; left: 0; background: white; min-width: 200px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.08); border-radius: 1rem; padding: 0.6rem 0;
+      opacity: 0; visibility: hidden; transform: translateY(8px); transition: all 0.2s ease;
+      border: 1px solid rgba(0,0,0,0.04); z-index: 10;
+    }
+    .dropdown:hover .dropdown-content { opacity: 1; visibility: visible; transform: translateY(0); }
+    .dropdown-content a {
+      display: block; padding: 0.6rem 1.5rem; text-decoration: none; color: #1e1e2f;
+      font-size: 0.95rem; transition: background 0.1s;
+    }
+    .dropdown-content a:hover { background: #f0f6ff; color: #1e4a6d; }
+
+    .auth-buttons { display: flex; gap: 1rem; align-items: center; }
+    .btn-outline {
+      border: 1px solid #1e4a6d; background: transparent; padding: 0.45rem 1.3rem;
+      border-radius: 40px; font-weight: 500; color: #1e4a6d; text-decoration: none;
+      transition: all 0.2s; font-size: 0.95rem;
+    }
+    .btn-outline:hover { background: #1e4a6d; color: white; }
+    .btn-primary {
+      background: #1e4a6d; border: none; padding: 0.45rem 1.5rem; border-radius: 40px;
+      font-weight: 500; color: white; text-decoration: none; transition: background 0.15s;
+      font-size: 0.95rem; box-shadow: 0 4px 8px rgba(30,74,109,0.15);
+    }
+    .btn-primary:hover { background: #0f3a55; }
+
+    .lang-switch {
+      display: flex; align-items: center; gap: 0.5rem; margin-left: 1rem;
+      background: #edf2f7; padding: 0.2rem 0.2rem; border-radius: 40px;
+    }
+    .lang-option {
+      padding: 0.3rem 1rem; border-radius: 30px; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; transition: 0.1s; color: #4a5d6e; user-select: none;
+    }
+    .lang-option.active { background: #1e4a6d; color: white; }
+
+    /* Modal */
+    .modal {
+      display: none; position: fixed; z-index: 200; left: 0; top: 0; width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); align-items: center; justify-content: center;
+    }
+    .modal.active { display: flex; }
+    .modal-content {
+      background: white; max-width: 450px; width: 90%; padding: 2rem; border-radius: 32px;
+      box-shadow: 0 30px 50px rgba(0,0,0,0.2); position: relative;
+    }
+    .modal-content h3 { font-size: 1.8rem; color: #0b2a40; margin-bottom: 1.2rem; }
+    .modal-content p { margin: 0.8rem 0; display: flex; align-items: center; gap: 0.8rem; font-size: 1.1rem; }
+    .modal-content i { width: 2rem; color: #1e4a6d; font-size: 1.4rem; }
+    .modal-content a { color: #1e4a6d; text-decoration: none; font-weight: 500; }
+    .modal-content a:hover { text-decoration: underline; }
+    .close-modal {
+      position: absolute; top: 1rem; right: 1.5rem; font-size: 2rem; cursor: pointer; color: #7f8fa3;
+    }
+    .close-modal:hover { color: #1e4a6d; }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 2rem 2rem 1rem; }
+
+    /* Loading spinner */
+    .loading-spinner {
+      text-align: center; padding: 4rem 2rem;
+    }
+    .spinner {
+      display: inline-block; width: 50px; height: 50px;
+      border: 4px solid #e2ecf5; border-radius: 50%;
+      border-top-color: #1e4a6d; animation: spin 1s ease-in-out infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Combined hero + welcome module */
+    .hero-combined {
+      border-radius: 28px; overflow: hidden; margin-bottom: 1rem; box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+      background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop');
+      background-size: cover; background-position: center 20%;
+      min-height: 300px; display: flex; align-items: center; padding: 2rem 3rem;
+      position: relative; isolation: isolate; color: white;
+    }
+    .hero-combined::before {
+      content: ''; position: absolute; inset: 0; background: rgba(10, 40, 65, 0.8); border-radius: 28px;
+      z-index: -1;
+    }
+    .hero-combined-content {
+      display: flex; flex-direction: column;
+      max-width: 1000px;
+      width: 100%;
+    }
+    .hero-combined h1,
+    .hero-tagline,
+    .hero-combined p {
+      text-align: justify;
+      text-justify: inter-word;
+    }
+    .hero-combined h1 {
+      font-size: 2.5rem; font-weight: 700; line-height: 1.2; text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      margin-bottom: 0.2rem;
+    }
+    .hero-tagline {
+      font-size: 1.3rem; font-weight: 500; color: #ffd966;
+      margin-bottom: 0.5rem;
+    }
+    .hero-combined p {
+      font-size: 1.1rem; color: rgba(255,255,255,0.95);
+      margin-bottom: 0.5rem;
+    }
+    .welcome-icon {
+      font-size: 2.5rem; color: #ffd966; margin-bottom: 0.2rem;
+      text-align: left;
+    }
+
+    /* Sticky search bar */
+    .sticky-search {
+      position: sticky; top: 80px; z-index: 90;
+      background: white; border-radius: 60px; box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      margin: 0.5rem 0 2rem 0; border: 1px solid #e0eaf2;
+    }
+    .search-filter-row {
+      display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
+      background: #f8fafd; border-radius: 60px; padding: 0.5rem 1rem 0.5rem 2rem;
+    }
+    .search-filter-row i { font-size: 1.4rem; color: #6f8faf; }
+    .search-filter-row input {
+      flex: 1; border: none; background: transparent; font-size: 1.1rem; padding: 0.8rem 0;
+      outline: none; color: #13293e; min-width: 200px;
+    }
+    .search-filter-row input::placeholder { color: #8fa3b9; }
+    .category-select {
+      background: white; border: 1px solid #cbd5e1; border-radius: 40px;
+      padding: 0.6rem 2rem 0.6rem 1.5rem; font-size: 1rem; color: #1e1e2f;
+      cursor: pointer; outline: none; appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%234b5e71" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>');
+      background-repeat: no-repeat; background-position: right 1rem center; background-size: 1rem;
+    }
+    .search-btn {
+      background: #1e4a6d; border: none; color: white; font-weight: 600; padding: 0.7rem 2rem;
+      border-radius: 40px; cursor: pointer; transition: 0.15s; font-size: 1rem;
+    }
+    .search-btn:hover { background: #0f3a55; }
+
+    .product-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem;
+      margin: 2rem 0 3rem;
+    }
+    
+    .product-card {
+      background: white; border-radius: 24px; box-shadow: 0 6px 16px rgba(0,0,0,0.02);
+      border: 1px solid #edf2f7; overflow: hidden; transition: transform 0.2s, box-shadow 0.3s; cursor: pointer;
+      display: flex; flex-direction: column;
+      position: relative;
+    }
+    .product-card:hover { transform: translateY(-6px); box-shadow: 0 22px 32px -12px rgba(30,74,109,0.18); border-color: transparent; }
+    
+    /* Verified badge on image */
+    .image-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1/1;
+      background: #eef2f6;
+    }
+    
+    .product-img { 
+      width: 100%; height: 100%; object-fit: cover; display: block; 
+    }
+    
+    .verified-badge-image {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #2ecc71;
+      color: white;
+      border-radius: 30px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+      border: 2px solid white;
+      z-index: 5;
+    }
+    
+    .verified-badge-image i {
+      font-size: 0.9rem;
+    }
+
+    /* Seller type badge */
+    .seller-type-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0.15rem 0.6rem;
+      border-radius: 30px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      margin-left: 0.3rem;
+    }
+    
+    .seller-type-badge.shop {
+      background: #e1effa;
+      color: #1e4a6d;
+    }
+    
+    .seller-type-badge.individual {
+      background: #fff4e5;
+      color: #b85c00;
+    }
+    
+    .product-info { 
+      padding: 1.2rem 1rem 1rem; 
+      flex: 1;
+    }
+    
+    .product-info h3 { 
+      font-weight: 600; font-size: 1.2rem; margin-bottom: 0.3rem; 
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    
+    .product-desc {
+      color: #4b5e71; font-size: 0.9rem; margin-bottom: 0.8rem;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-height: 2.6rem;
+    }
+
+    /* Seller information on product card */
+    .seller-info-card {
+      background: #f8fafd;
+      border-top: 1px solid #e9f0f5;
+      padding: 0.8rem 1rem;
+      font-size: 0.85rem;
+      border-radius: 0 0 24px 24px;
+    }
+
+    .seller-name-card {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #1e4a6d;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .seller-name-card i {
+      color: #1f6eaf;
+      font-size: 0.9rem;
+    }
+
+    .seller-details-card {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: #4f6f8f;
+      font-size: 0.8rem;
+    }
+
+    .seller-details-card span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .seller-details-card i {
+      color: #1f6eaf;
+      font-size: 0.7rem;
+      width: 14px;
+    }
+
+    .price-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px dashed #e2ecf5;
+    }
+
+    .product-price { 
+      font-weight: 700; 
+      font-size: 1.2rem; 
+      color: #1e4a6d; 
+    }
+    
+    .negotiable-badge {
+      display: inline-block; 
+      background: #e6f2fa; 
+      border-radius: 30px; 
+      padding: 0.2rem 0.8rem;
+      font-size: 0.7rem; 
+      font-weight: 600; 
+      color: #1e4a6d; 
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .empty-state {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 4rem 2rem;
+      color: #6f8faf;
+      background: #f8fafd;
+      border-radius: 32px;
+      font-size: 1.2rem;
+    }
+    .empty-state i {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      color: #b5c9e0;
+    }
+
+    footer { background: #0b2a40; color: #d1dde9; margin-top: 3rem; padding: 3rem 2rem 2rem; border-radius: 40px 40px 0 0; }
+    .footer-content { max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; }
+    .social-only { display: flex; gap: 2.2rem; }
+    .social-only a { font-size: 2.2rem; color: #cbd5e1; transition: color 0.15s; }
+    .social-only a:hover { color: white; transform: scale(1.05); }
+    .copyright { text-align: center; font-size: 0.9rem; color: #98b1c9; margin-top: 2.5rem; border-top: 1px solid #1f4a6e; padding-top: 1.8rem; }
+  </style>
+</head>
+<body>
+  <header class="sticky-nav">
+    <div class="nav-container">
+      <div class="logo-area">
+        <i class="fas fa-shopping-bag logo-icon"></i>
+        <div class="logo-text">GuraNeza <span>| BuySmart</span></div>
+      </div>
+      <div class="nav-links">
+        <div class="dropdown">
+          <button class="dropbtn">Shop <i class="fas fa-chevron-down"></i></button>
+          <div class="dropdown-content">
+            <a href="#">All products</a>
+            <a href="#">Best sellers</a>
+            <a href="#">Limited deals</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button class="dropbtn">Support <i class="fas fa-chevron-down"></i></button>
+          <div class="dropdown-content">
+            <a href="#" id="helpCenterLink">Help Center</a>
+          </div>
+        </div>
+      </div>
+      <div class="auth-buttons">
+        <div class="lang-switch" id="langToggle">
+          <span class="lang-option active" data-lang="en">EN</span>
+          <span class="lang-option" data-lang="rw">RW</span>
+        </div>
+        <a href="login.html" class="btn-outline"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a href="login.html" class="btn-primary"><i class="fas fa-user-plus"></i> Register</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Help Center Modal -->
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" id="closeModalBtn">&times;</span>
+      <h3>Help Center</h3>
+      <p><i class="fas fa-envelope"></i> <a href="mailto:guraneza@gmail.com">guraneza@gmail.com</a></p>
+      <p><i class="fas fa-phone-alt"></i> +250-789-123-456</p>
+      <p><i class="fas fa-life-ring"></i> <a href="#" id="modalHelpCenter">Frequently Asked Questions</a></p>
+      <p><i class="fab fa-tiktok"></i> <a href="https://tiktok.com/@guraneza" target="_blank">@guraneza</a></p>
+      <p><i class="fab fa-youtube"></i> <a href="https://youtube.com/@guraneza" target="_blank">@guraneza</a></p>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- Combined hero + welcome module -->
+    <div class="hero-combined">
+      <div class="hero-combined-content">
+        <div class="welcome-icon"><i class="fas fa-shopping-bag"></i></div>
+        <h1 id="heroTitle">GuraNeza / BuySmart</h1>
+        <div class="hero-tagline">Buy Smart. Sell Easy.</div>
+        <p>Your trusted online marketplace connecting buyers and sellers across Rwanda and beyond. GuraNeza, also called BuySmart, is a trusted online marketplace where users can post products with real images and prices in Rwandan francs, while buyers can easily search, compare, and negotiate. The platform also features verified shops and ratings to help users buy and sell with confidence.
+        </p>
+      </div>
+    </div>
+
+    <!-- Sticky search bar -->
+    <div class="sticky-search">
+      <div class="search-filter-row">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Search products by name, seller, shop, location...">
+        <select id="categorySelect" class="category-select">
+          <option value="all">All Categories</option>
+        </select>
+        <button class="search-btn" id="searchBtn"><i class="fas fa-filter"></i> Filter</button>
+      </div>
+    </div>
+
+    <!-- Loading indicator -->
+    <div id="loadingSpinner" class="loading-spinner">
+      <div class="spinner"></div>
+      <p style="margin-top: 1rem; color: #6f8faf;">Loading products...</p>
+    </div>
+
+    <!-- Dynamic product grid - loads from Firebase -->
+    <div class="product-grid" id="productGrid" style="display: none;"></div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand"><p>© 2026 GuraNeza | BuySmart</p></div>
+      <div class="social-only">
+        <a href="https://tiktok.com/@guraneza" target="_blank"><i class="fab fa-tiktok"></i></a>
+        <a href="https://youtube.com/@guraneza" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="X"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+    <div class="copyright"><span>Buy Smart, Sell Easy: @guraneza • Follow for updates</span></div>
+  </footer>
+
+  <!-- Firebase SDKs -->
+  <script type="module">
+    // Import Firebase modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { 
+      getDatabase, 
+      ref, 
+      get
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAr6-rTa8yQCxr41JjWysFLHeFxH0C2IMI",
+      authDomain: "guraneza-714f7.firebaseapp.com",
+      databaseURL: "https://guraneza-714f7-default-rtdb.firebaseio.com",
+      projectId: "guraneza-714f7",
+      storageBucket: "guraneza-714f7.firebasestorage.app",
+      messagingSenderId: "457107620336",
+      appId: "1:457107620336:web:1583db305b03528fcf5d35"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth(app);
+
+    // Global variables
+    let products = [];
+    let shops = [];
+    let allProducts = [];
+
+    // DOM Elements
+    const productGrid = document.getElementById('productGrid');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const searchInput = document.getElementById('searchInput');
+    const categorySelect = document.getElementById('categorySelect');
+    const searchBtn = document.getElementById('searchBtn');
+
+    // Toast notification function
+    function showToast(message, type = 'error') {
+      const toast = document.createElement('div');
+      toast.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: white;
+        color: ${type === 'error' ? '#ef4444' : '#333'};
+        padding: 16px 24px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        z-index: 9999;
+        border-left: 4px solid ${type === 'error' ? '#ef4444' : '#2ecc71'};
+        animation: slideIn 0.3s ease;
+      `;
+      
+      const icon = type === 'error' ? 'fa-exclamation-circle' : 'fa-check-circle';
+      
+      toast.innerHTML = `
+        <i class="fas ${icon}" style="color: ${type === 'error' ? '#ef4444' : '#2ecc71'}; font-size: 1.5rem;"></i>
+        <span style="font-size: 0.95rem;">${message}</span>
+      `;
+      
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+      
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes slideIn {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+          from { transform: translateX(0); opacity: 1; }
+          to { transform: translateX(100%); opacity: 0; }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    // Check authentication state
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log('User is logged in:', user.email);
+      } else {
+        console.log('User is not logged in - viewing public products');
+      }
+    });
+
+    // Load shops for reference
+    async function loadShops() {
+      try {
+        const shopsRef = ref(database, 'shops');
+        const snapshot = await get(shopsRef);
+        
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          shops = [];
+          Object.keys(data).forEach((key) => {
+            const shop = data[key];
+            shops.push({
+              id: shop.shopId || key,
+              name: shop.name || 'Unnamed Shop',
+              phone: shop.contact?.phone || '',
+              email: shop.contact?.email || '',
+              location: shop.location || '',
+              verified: shop.verified || false
+            });
+          });
+          console.log('Loaded shops:', shops.length);
+        }
+      } catch (error) {
+        console.error('Error loading shops:', error);
+      }
+    }
+
+    // Fetch products from Firebase
+    async function fetchProducts() {
+      console.log('Fetching products from Firebase...');
+      
+      try {
+        // Load shops first
+        await loadShops();
+        
+        const productsRef = ref(database, 'products');
+        const snapshot = await get(productsRef);
+        
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          console.log('Raw Firebase data:', data);
+          
+          // Convert Firebase object to array
+          products = [];
+          
+          Object.keys(data).forEach((key) => {
+            const product = data[key];
+            
+            // Check if this is a shop product
+            const isFromShop = !!product.shopId;
+            
+            // Handle both old and new data structures
+            let formattedProduct = {
+              id: product.productId || key,
+              name: product.name || 'Unnamed Product',
+              category: product.category || 'Other',
+              description: product.description || 'No description',
+              negociable: product.negotiable || false,
+              verified: product.verified || false,
+              price: product.price || 0,
+              images: [],
+              timestamp: product.timestamp || new Date().toISOString(),
+              isFromShop: isFromShop
+            };
+
+            // Add images
+            if (product.image1) formattedProduct.images.push(product.image1);
+            if (product.image2) formattedProduct.images.push(product.image2);
+            if (product.image3) formattedProduct.images.push(product.image3);
+
+            if (isFromShop) {
+              // SHOP PRODUCT - get shop info
+              formattedProduct.shopId = product.shopId;
+              formattedProduct.shopName = product.shopName || '';
+              formattedProduct.shopPhone = product.shopPhone || '';
+              formattedProduct.shopLocation = product.shopLocation || '';
+              
+              // Try to get shop info from shops array
+              if ((!formattedProduct.shopName || !formattedProduct.shopPhone) && product.shopId) {
+                const shop = shops.find(s => s.id === product.shopId);
+                if (shop) {
+                  formattedProduct.shopName = shop.name;
+                  formattedProduct.shopPhone = shop.phone;
+                  formattedProduct.shopLocation = shop.location;
+                }
+              }
+              
+              // For display, use shop info as seller info
+              formattedProduct.sellerName = formattedProduct.shopName;
+              formattedProduct.sellerPhone = formattedProduct.shopPhone;
+              formattedProduct.sellerLocation = formattedProduct.shopLocation;
+              formattedProduct.sellerEmail = '';
+            } else {
+              // INDIVIDUAL SELLER PRODUCT
+              if (product.seller) {
+                // Nested seller object
+                formattedProduct.sellerName = product.seller.name || 'Unknown Seller';
+                formattedProduct.sellerPhone = product.seller.phone || 'N/A';
+                formattedProduct.sellerEmail = product.seller.email || '';
+                formattedProduct.sellerLocation = product.seller.location || 'N/A';
+              } else {
+                // Flat structure
+                formattedProduct.sellerName = product.sellerName || product.postedBy || 'Unknown Seller';
+                formattedProduct.sellerPhone = product.sellerPhone || 'N/A';
+                formattedProduct.sellerEmail = product.sellerEmail || '';
+                formattedProduct.sellerLocation = product.sellerLocation || 'N/A';
+              }
+            }
+
+            products.push(formattedProduct);
+          });
+
+          console.log(`Loaded ${products.length} products (${products.filter(p => p.isFromShop).length} from shops, ${products.filter(p => !p.isFromShop).length} from individual sellers)`);
+          
+          // SORT PRODUCTS: Verified first, then by timestamp (newest)
+          products.sort((a, b) => {
+            if (a.verified && !b.verified) return -1;
+            if (!a.verified && b.verified) return 1;
+            return new Date(b.timestamp) - new Date(a.timestamp);
+          });
+          
+          allProducts = [...products];
+          
+          // Populate categories and render
+          populateCategories();
+          renderProducts(products);
+          
+          // Hide spinner, show grid
+          loadingSpinner.style.display = 'none';
+          productGrid.style.display = 'grid';
+        } else {
+          console.log('No products found in Firebase');
+          products = [];
+          allProducts = [];
+          
+          loadingSpinner.style.display = 'none';
+          productGrid.style.display = 'grid';
+          productGrid.innerHTML = `
+            <div class="empty-state">
+              <i class="fas fa-box-open"></i>
+              <h3>No products yet</h3>
+              <p>Be the first to add a product!</p>
+            </div>`;
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        
+        if (error.code === 'PERMISSION_DENIED') {
+          showToast('Firebase rules are blocking access. Please update your database rules.', 'error');
+          
+          productGrid.innerHTML = `
+            <div class="empty-state">
+              <i class="fas fa-shield-alt"></i>
+              <h3>Database Rules Issue</h3>
+              <p>Please update your Firebase Realtime Database rules:</p>
+              <pre style="background: #1e293b; color: #fff; padding: 1rem; border-radius: 8px; text-align: left; margin: 1rem 0; overflow-x: auto;">
+{
+  "rules": {
+    "products": {
+      ".read": true,
+      ".write": "auth != null"
+    }
+  }
+}</pre>
+              <p style="font-size: 0.9rem;">Go to Firebase Console → Realtime Database → Rules and paste the rules above.</p>
+            </div>
+          `;
+        } else {
+          productGrid.innerHTML = `
+            <div class="empty-state">
+              <i class="fas fa-exclamation-triangle"></i>
+              <h3>Error loading products</h3>
+              <p>${error.message || 'Please try again later'}</p>
+            </div>`;
+        }
+        
+        loadingSpinner.style.display = 'none';
+        productGrid.style.display = 'grid';
+      }
+    }
+
+    // Get unique categories from products for the dropdown
+    function populateCategories() {
+      const categories = ['all', ...new Set(products.map(p => p.category).filter(Boolean))];
+      categorySelect.innerHTML = '';
+      categories.forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat === 'all' ? 'all' : cat;
+        option.textContent = cat === 'all' ? 'All Categories' : cat;
+        categorySelect.appendChild(option);
+      });
+    }
+
+    function renderProducts(productsToRender) {
+      if (productsToRender.length === 0) {
+        productGrid.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-search"></i>
+            <h3>No products match your criteria</h3>
+            <p>Try adjusting your search or filter</p>
+          </div>`;
+        return;
+      }
+
+      productGrid.innerHTML = '';
+      productsToRender.forEach(function(prod) {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.setAttribute('data-id', prod.id);
+        
+        // Handle click - check login status
+        card.addEventListener('click', function() {
+          onAuthStateChanged(auth, (user) => {
+            window.location.href = user ? 'buy.html?id=' + prod.id : 'login.html';
+          });
+        });
+
+        // Use first image if available, otherwise placeholder
+        const imageUrl = prod.images && prod.images.length > 0 
+          ? prod.images[0] 
+          : 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&auto=format';
+
+        const negotiableHtml = prod.negociable
+          ? '<span class="negotiable-badge">Negotiable</span>'
+          : '<span class="negotiable-badge" style="background:#f0f0f0; color:#6f6f6f;">Fixed</span>';
+
+        // Verified badge HTML - only show if verified is true
+        const verifiedBadgeHtml = prod.verified 
+          ? '<div class="verified-badge-image"><i class="fas fa-check-circle"></i> Verified</div>'
+          : '';
+
+        // Determine seller name and contact info
+        const sellerName = prod.isFromShop ? prod.shopName : prod.sellerName;
+        const sellerPhone = prod.isFromShop ? prod.shopPhone : prod.sellerPhone;
+        const sellerLocation = prod.isFromShop ? prod.shopLocation : prod.sellerLocation;
+        const sellerEmail = prod.isFromShop ? '' : prod.sellerEmail;
+        const sellerType = prod.isFromShop ? 'shop' : 'individual';
+        const sellerTypeLabel = prod.isFromShop ? 'Shop' : 'Individual';
+        
+        // Seller type badge
+        const sellerTypeHtml = `
+          <span class="seller-type-badge ${sellerType}">
+            <i class="fas fa-${prod.isFromShop ? 'store' : 'user'}"></i> ${sellerTypeLabel}
+          </span>
+        `;
+
+        card.innerHTML = `
+          <div class="image-container">
+            <img class="product-img" src="${imageUrl}" alt="${prod.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&auto=format'">
+            ${verifiedBadgeHtml}
+          </div>
+          <div class="product-info">
+            <h3 title="${prod.name}">${prod.name}</h3>
+            <div class="product-desc" title="${prod.description}">${prod.description || 'No description'}</div>
+            <div class="price-section">
+              <span class="product-price">${Number(prod.price).toLocaleString()} RWF</span>
+              ${negotiableHtml}
+            </div>
+          </div>
+          <div class="seller-info-card">
+            <div class="seller-name-card" title="${sellerName || 'Unknown'}">
+              <i class="fas fa-${prod.isFromShop ? 'store' : 'user-circle'}"></i> 
+              ${sellerName || 'Unknown Seller'}
+              ${sellerTypeHtml}
+            </div>
+            <div class="seller-details-card">
+              ${sellerPhone ? `<span title="${sellerPhone}"><i class="fas fa-phone"></i> ${sellerPhone}</span>` : ''}
+              ${sellerLocation ? `<span title="${sellerLocation}"><i class="fas fa-map-marker-alt"></i> ${sellerLocation}</span>` : ''}
+              ${sellerEmail ? `<span title="${sellerEmail}"><i class="fas fa-envelope"></i> ${sellerEmail}</span>` : ''}
+            </div>
+          </div>
+        `;
+        productGrid.appendChild(card);
+      });
+    }
+
+    function filterProducts() {
+      const searchTerm = searchInput.value.trim().toLowerCase();
+      const selectedCategory = categorySelect.value;
+
+      // First filter
+      let filtered = products.filter(function(prod) {
+        const matchesCategory = selectedCategory === 'all' || prod.category === selectedCategory;
+        
+        // Search in all possible fields
+        const productName = prod.name.toLowerCase();
+        const productDesc = prod.description.toLowerCase();
+        
+        // Seller info (for individual sellers)
+        const sellerName = (prod.sellerName || '').toLowerCase();
+        const sellerPhone = (prod.sellerPhone || '').toLowerCase();
+        const sellerLocation = (prod.sellerLocation || '').toLowerCase();
+        const sellerEmail = (prod.sellerEmail || '').toLowerCase();
+        
+        // Shop info (for shop products)
+        const shopName = (prod.shopName || '').toLowerCase();
+        const shopPhone = (prod.shopPhone || '').toLowerCase();
+        const shopLocation = (prod.shopLocation || '').toLowerCase();
+        
+        const matchesSearch = searchTerm === '' || 
+          productName.includes(searchTerm) || 
+          productDesc.includes(searchTerm) ||
+          sellerName.includes(searchTerm) ||
+          sellerPhone.includes(searchTerm) ||
+          sellerLocation.includes(searchTerm) ||
+          sellerEmail.includes(searchTerm) ||
+          shopName.includes(searchTerm) ||
+          shopPhone.includes(searchTerm) ||
+          shopLocation.includes(searchTerm);
+          
+        return matchesCategory && matchesSearch;
+      });
+
+      // Then sort filtered results: verified first, then by timestamp
+      filtered.sort((a, b) => {
+        if (a.verified && !b.verified) return -1;
+        if (!a.verified && b.verified) return 1;
+        return new Date(b.timestamp) - new Date(a.timestamp);
+      });
+
+      renderProducts(filtered);
+    }
+
+    // Event listeners
+    searchBtn.addEventListener('click', filterProducts);
+    categorySelect.addEventListener('change', filterProducts);
+    searchInput.addEventListener('keyup', function(e) {
+      if (e.key === 'Enter') {
+        filterProducts();
+      }
+    });
+
+    // Start fetching products
+    fetchProducts();
+
+    // Modal functionality
+    const modal = document.getElementById('contactModal');
+    const helpLink = document.getElementById('helpCenterLink');
+    const closeBtn = document.getElementById('closeModalBtn');
+    
+    if (helpLink) {
+      helpLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        modal.classList.add('active');
+      });
+    }
+    
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function() {
+        modal.classList.remove('active');
+      });
+    }
+    
+    window.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+    
+    const modalHelpCenter = document.getElementById('modalHelpCenter');
+    if (modalHelpCenter) {
+      modalHelpCenter.addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('📘 FAQ page coming soon.');
+      });
+    }
+
+    // Language toggle
+    const langOptions = document.querySelectorAll('.lang-option');
+    const heroTitle = document.getElementById('heroTitle');
+
+    const translations = {
+      en: {
+        heroTitle: 'GuraNeza / BuySmart',
+      },
+      rw: {
+        heroTitle: 'GuraNeza / BuySmart',
+      }
+    };
+
+    function setLanguage(lang) {
+      localStorage.setItem('guraneza_lang', lang);
+      var t = translations[lang];
+      if (heroTitle) heroTitle.innerText = t.heroTitle;
+      langOptions.forEach(function(opt) {
+        if (opt.dataset.lang === lang) {
+          opt.classList.add('active');
+        } else {
+          opt.classList.remove('active');
+        }
+      });
+    }
+
+    langOptions.forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        setLanguage(opt.dataset.lang);
+      });
+    });
+    
+    var savedLang = localStorage.getItem('guraneza_lang') || 'en';
+    setLanguage(savedLang);
+  </script>
+</body>
+</html>

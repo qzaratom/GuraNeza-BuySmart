@@ -1,0 +1,3045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GuraNeza | BuySmart – Product Details & Chat</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body { 
+      background: #f0f2f5; 
+      color: #1e1e2f; 
+      line-height: 1.5; 
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sticky-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+      border-bottom: 1px solid #edf2f7;
+    }
+    
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .logo-area { 
+      display: flex; 
+      align-items: center; 
+      gap: 0.6rem; 
+      flex-shrink: 0;
+    }
+    
+    .logo-icon { 
+      font-size: 1.8rem; 
+      color: #1e4a6d; 
+    }
+    
+    .logo-text { 
+      font-weight: 700; 
+      font-size: 1.3rem; 
+      letter-spacing: -0.02em; 
+      color: #1a2b3c;
+    }
+    
+    .logo-text span { 
+      color: #1e4a6d; 
+      font-weight: 600; 
+      background: #e1effa;
+      padding: 0.2rem 0.5rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      margin-left: 0.3rem;
+    }
+
+    .nav-links { 
+      display: flex; 
+      gap: 0.5rem; 
+      align-items: center; 
+      margin: 0 1rem;
+    }
+    
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #4a5b6b;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 40px;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
+    
+    .nav-link i {
+      color: #6f8faf;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    
+    .nav-link:hover {
+      background: #f0f7ff;
+      color: #1e4a6d;
+    }
+    
+    .nav-link:hover i {
+      color: #1e4a6d;
+    }
+    
+    .nav-link.active {
+      background: #1e4a6d;
+      color: white;
+    }
+    
+    .nav-link.active i {
+      color: white;
+    }
+
+    .action-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .letshop-btn {
+      background: #ffd966;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      color: #1e4a6d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2s;
+      border: 1px solid #f0c45a;
+    }
+    
+    .letshop-btn:hover {
+      background: #f0c45a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .cart-btn {
+      background: #e1effa;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      color: #1e4a6d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2s;
+      border: 1px solid #c9e0fa;
+      position: relative;
+    }
+    
+    .cart-btn:hover {
+      background: #c9e0f7;
+      transform: translateY(-2px);
+    }
+    
+    .cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #1e4a6d;
+      color: white;
+      border-radius: 30px;
+      padding: 0.15rem 0.4rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      border: 2px solid white;
+    }
+
+    .profile-section {
+      display: flex;
+      align-items: center;
+    }
+    
+    .profile-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.2rem 0.5rem 0.2rem 0.2rem;
+      border-radius: 40px;
+      transition: 0.2s;
+      height: 44px;
+    }
+    
+    .profile-btn:hover {
+      background: #f0f8ff;
+    }
+    
+    .profile-img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #e9f2fc;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1f6eaf;
+      font-size: 1.3rem;
+      border: 2px solid white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    
+    .profile-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .profile-name {
+      font-weight: 600;
+      color: #1e3e5c;
+      font-size: 0.9rem;
+      max-width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .dropdown {
+      position: relative;
+      margin-left: 0.2rem;
+    }
+    
+    .dots-btn {
+      background: transparent;
+      border: none;
+      font-size: 1.3rem;
+      color: #4a5d6e;
+      cursor: pointer;
+      padding: 0.3rem;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+    }
+    
+    .dots-btn:hover {
+      background: #e1effa;
+      color: #1e4a6d;
+    }
+    
+    .dropdown-content {
+      position: absolute;
+      top: 3.2rem;
+      right: 0;
+      background: white;
+      min-width: 200px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+      border-radius: 1rem;
+      padding: 0.5rem 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.2s ease;
+      border: 1px solid #e2ecf5;
+      z-index: 100;
+    }
+    
+    .dropdown:hover .dropdown-content {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .dropdown-content a {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.8rem 1.5rem;
+      text-decoration: none;
+      color: #1e3e5c;
+      font-size: 0.9rem;
+      transition: 0.1s;
+    }
+    
+    .dropdown-content a i {
+      color: #1f6eaf;
+      width: 20px;
+      font-size: 1rem;
+    }
+    
+    .dropdown-content a:hover {
+      background: #f0f8ff;
+    }
+
+    .dropdown-divider {
+      height: 1px;
+      background: #e2ecf5;
+      margin: 0.5rem 1rem;
+    }
+
+    .lang-option {
+      padding: 0.5rem 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: #4a5d6e;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      transition: 0.1s;
+    }
+
+    .lang-option i {
+      color: #1f6eaf;
+      width: 20px;
+      font-size: 1rem;
+    }
+
+    .lang-option:hover {
+      background: #f0f8ff;
+    }
+
+    .lang-option.active {
+      background: #e1effa;
+      color: #1e4a6d;
+      font-weight: 600;
+    }
+
+    .lang-option.active i {
+      color: #1e4a6d;
+    }
+
+    .toast-container {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .toast {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      padding: 14px 20px;
+      min-width: 300px;
+      max-width: 400px;
+      transform: translateX(120%);
+      transition: transform 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      pointer-events: auto;
+      border-left: 4px solid #2ecc71;
+    }
+
+    .toast.show {
+      transform: translateX(0);
+    }
+
+    .toast-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #2ecc71;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+    }
+
+    .toast-content {
+      flex: 1;
+    }
+
+    .toast-title {
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 2px;
+      font-size: 0.9rem;
+    }
+
+    .toast-message {
+      color: #64748b;
+      font-size: 0.8rem;
+    }
+
+    .toast-close {
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 4px;
+    }
+
+    .toast.error {
+      border-left-color: #ef4444;
+    }
+    .toast.error .toast-icon {
+      background: #ef4444;
+    }
+
+    .toast.warning {
+      border-left-color: #f59e0b;
+    }
+    .toast.warning .toast-icon {
+      background: #f59e0b;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 200;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.active { display: flex; }
+    .modal-content {
+      background: white;
+      max-width: 450px;
+      width: 90%;
+      padding: 2rem;
+      border-radius: 32px;
+      box-shadow: 0 30px 50px rgba(0,0,0,0.2);
+      position: relative;
+    }
+    .modal-content h3 {
+      font-size: 1.6rem;
+      color: #0b2a40;
+      margin-bottom: 1.2rem;
+    }
+    .modal-content p {
+      margin: 0.8rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1rem;
+    }
+    .modal-content i {
+      width: 2rem;
+      color: #1e4a6d;
+      font-size: 1.2rem;
+    }
+    .modal-content a {
+      color: #1e4a6d;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .close-modal {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #7f8fa3;
+    }
+    .close-modal:hover {
+      color: #1e4a6d;
+    }
+
+    /* Full HD Image Viewer Modal */
+    .image-viewer-modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .image-viewer-modal.active {
+      display: flex;
+    }
+    
+    .image-viewer-content {
+      position: relative;
+      width: 90%;
+      height: 90%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .image-viewer-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 2.5rem;
+      cursor: pointer;
+      z-index: 1001;
+      transition: 0.2s;
+      width: 50px;
+      height: 50px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .image-viewer-close:hover {
+      background: rgba(255,255,255,0.3);
+      transform: scale(1.1);
+    }
+    
+    .image-viewer-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 60px;
+      height: 60px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+      z-index: 1001;
+    }
+    
+    .image-viewer-nav:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-50%) scale(1.1);
+    }
+    
+    .image-viewer-nav.prev {
+      left: 30px;
+    }
+    
+    .image-viewer-nav.next {
+      right: 30px;
+    }
+    
+    .image-viewer-nav:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    
+    .image-viewer-main {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    
+    .image-viewer-counter {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      background: rgba(0,0,0,0.5);
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      backdrop-filter: blur(5px);
+    }
+
+    /* Main Layout */
+    .main-layout {
+      flex: 1;
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      width: 100%;
+    }
+
+    /* Two Column Layout */
+    .two-column-layout {
+      display: flex;
+      gap: 2rem;
+      width: 100%;
+    }
+
+    /* Left Panel - Product Details */
+    .product-panel {
+      width: 40%;
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+      border: 1px solid #e2ecf5;
+      overflow-y: auto;
+      max-height: calc(100vh - 200px);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Product Images Section */
+    .product-images-section {
+      margin-bottom: 2rem;
+    }
+
+    .main-image-container {
+      width: 100%;
+      height: 400px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid #e2ecf5;
+      background: #f8fafd;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .main-image-container:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 24px rgba(30,74,109,0.2);
+    }
+
+    .main-image {
+      width: 100%;
+      height: 100%;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #f8fafd;
+      transition: transform 0.3s ease;
+    }
+
+    .image-thumbnails {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding: 0.5rem 0;
+      scrollbar-width: thin;
+    }
+
+    .image-thumbnail {
+      width: 80px;
+      height: 80px;
+      border-radius: 12px;
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .image-thumbnail:hover {
+      transform: scale(1.05);
+      border-color: #1e4a6d;
+    }
+
+    .image-thumbnail.active {
+      border-color: #1e4a6d;
+      box-shadow: 0 0 0 3px rgba(30,74,109,0.3);
+    }
+
+    .no-images {
+      width: 100%;
+      height: 400px;
+      border-radius: 20px;
+      background: #f8fafd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8aa9c9;
+      font-size: 1.2rem;
+      border: 2px dashed #e2ecf5;
+    }
+
+    .no-images i {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    /* Product Info Section */
+    .product-info-section {
+      order: 2;
+    }
+
+    .product-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #123456;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .product-badges {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .badge.verified {
+      background: #e3f5e3;
+      color: #1e7e34;
+    }
+
+    .badge.negotiable {
+      background: #e8f3e8;
+      color: #2e7d32;
+    }
+
+    .badge.shop {
+      background: #e1effa;
+      color: #1e4a6d;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .badge.shop:hover {
+      background: #c9e0f7;
+      transform: translateY(-2px);
+    }
+
+    .badge.individual {
+      background: #f0f0f0;
+      color: #4a5b6b;
+    }
+
+    .product-price {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1e4a6d;
+      margin-bottom: 1rem;
+    }
+
+    .product-price::after {
+      content: ' RWF';
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #6b89a5;
+      margin-left: 0.5rem;
+    }
+
+    .product-category {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #64748b;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .product-category i {
+      color: #1e4a6d;
+    }
+
+    .product-description {
+      color: #1e293b;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: #f8fafd;
+      border-radius: 16px;
+      border: 1px solid #e2ecf5;
+    }
+
+    /* Add to Cart Button on Product Page */
+    .add-to-cart-large {
+      background: #1e4a6d;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      width: 100%;
+      margin-bottom: 1.5rem;
+      border: 2px solid transparent;
+    }
+
+    .add-to-cart-large:hover {
+      background: #0f3a55;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(30,74,109,0.3);
+    }
+
+    .add-to-cart-large i {
+      font-size: 1.2rem;
+    }
+
+    .add-to-cart-large:active {
+      transform: translateY(0);
+    }
+
+    .seller-info {
+      background: #f8fafd;
+      border-radius: 16px;
+      padding: 1.5rem;
+      border: 1px solid #e2ecf5;
+      margin-top: 1.5rem;
+    }
+
+    .seller-info h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #1e4a6d;
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+    }
+
+    .seller-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .seller-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .seller-label {
+      font-size: 0.7rem;
+      color: #6b89a5;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .seller-value {
+      font-weight: 600;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .seller-value i {
+      color: #1e4a6d;
+      font-size: 0.9rem;
+    }
+
+    .visit-shop-btn {
+      background: #1e4a6d;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: 0.2s;
+      margin-top: 1rem;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .visit-shop-btn:hover {
+      background: #0f3a55;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(30,74,109,0.2);
+    }
+
+    /* Right Panel - Chat */
+    .chat-panel {
+      width: 60%;
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+      border: 1px solid #e2ecf5;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      max-height: calc(100vh - 200px);
+    }
+
+    .chat-header {
+      padding: 1.2rem 1.5rem;
+      background: #1e4a6d;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chat-header h2 {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .chat-header h2 i {
+      font-size: 1.3rem;
+    }
+
+    .chat-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .chat-action-btn {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .chat-action-btn:hover {
+      background: rgba(255,255,255,0.3);
+      transform: scale(1.05);
+    }
+
+    .chat-container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .contacts-sidebar {
+      width: 35%;
+      background: #f8fafd;
+      border-right: 1px solid #e2ecf5;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contacts-search {
+      padding: 1rem;
+      border-bottom: 1px solid #e2ecf5;
+    }
+
+    .contacts-search input {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border: 2px solid #e2ecf5;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      transition: 0.2s;
+      background: white;
+    }
+
+    .contacts-search input:focus {
+      outline: none;
+      border-color: #1e4a6d;
+      box-shadow: 0 0 0 3px rgba(30,74,109,0.1);
+    }
+
+    .contacts-list {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.8rem 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      border-bottom: 1px solid #e2ecf5;
+      position: relative;
+    }
+
+    .contact-item:hover {
+      background: #e1effa;
+    }
+
+    .contact-item.active {
+      background: #e1effa;
+      border-left: 4px solid #1e4a6d;
+    }
+
+    .contact-item.unread {
+      background: #fff4e5;
+    }
+
+    .contact-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #e9f2fc;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1f6eaf;
+      font-size: 1.3rem;
+      border: 2px solid white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .contact-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .contact-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .contact-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-name {
+      font-weight: 600;
+      color: #1e293b;
+      font-size: 0.85rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .contact-time {
+      font-size: 0.65rem;
+      color: #94a3b8;
+      white-space: nowrap;
+    }
+
+    .contact-product {
+      font-size: 0.7rem;
+      color: #1e4a6d;
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      margin-bottom: 0.2rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .contact-product i {
+      font-size: 0.6rem;
+    }
+
+    .contact-last-message {
+      font-size: 0.7rem;
+      color: #64748b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .unread-badge {
+      background: #ef4444;
+      color: white;
+      font-size: 0.6rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 30px;
+      margin-left: 0.3rem;
+      min-width: 18px;
+      text-align: center;
+    }
+
+    .messages-area {
+      width: 65%;
+      display: flex;
+      flex-direction: column;
+      background: #f0f5fa;
+    }
+
+    .messages-header {
+      padding: 0.8rem 1.2rem;
+      background: white;
+      border-bottom: 1px solid #e2ecf5;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .messages-header-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #e9f2fc;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1f6eaf;
+      font-size: 1.3rem;
+      border: 2px solid white;
+      overflow: hidden;
+    }
+
+    .messages-header-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .messages-header-info {
+      flex: 1;
+    }
+
+    .messages-header-name {
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 0.1rem;
+      font-size: 0.9rem;
+    }
+
+    .messages-header-product {
+      font-size: 0.7rem;
+      color: #1e4a6d;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .messages-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      background: #e5f0f9;
+    }
+
+    .message {
+      display: flex;
+      flex-direction: column;
+      max-width: 70%;
+    }
+
+    .message.sent {
+      align-self: flex-end;
+    }
+
+    .message.received {
+      align-self: flex-start;
+    }
+
+    .message-bubble {
+      padding: 0.6rem 1rem;
+      border-radius: 16px;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      word-wrap: break-word;
+    }
+
+    .message.sent .message-bubble {
+      background: #1e4a6d;
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .message.received .message-bubble {
+      background: white;
+      color: #1e293b;
+      border: 1px solid #e2ecf5;
+      border-bottom-left-radius: 4px;
+    }
+
+    .message-time {
+      font-size: 0.6rem;
+      color: #94a3b8;
+      margin-top: 0.2rem;
+      margin-left: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .message.sent .message-time {
+      justify-content: flex-end;
+    }
+
+    .message-status {
+      color: #2ecc71;
+      font-size: 0.6rem;
+    }
+
+    .message-input-area {
+      padding: 0.8rem 1.2rem;
+      background: white;
+      border-top: 1px solid #e2ecf5;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .message-input {
+      flex: 1;
+      padding: 0.6rem 1rem;
+      border: 2px solid #e2ecf5;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      transition: 0.2s;
+    }
+
+    .message-input:focus {
+      outline: none;
+      border-color: #1e4a6d;
+      box-shadow: 0 0 0 3px rgba(30,74,109,0.1);
+    }
+
+    .message-send-btn {
+      background: #1e4a6d;
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .message-send-btn:hover {
+      background: #0f3a55;
+      transform: scale(1.05);
+    }
+
+    .no-contact-selected,
+    .no-messages {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      color: #94a3b8;
+      background: #f0f5fa;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .no-contact-selected i,
+    .no-messages i {
+      font-size: 3rem;
+      color: #cbd5e1;
+    }
+
+    .start-chat-btn {
+      background: #1e4a6d;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.5rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 0.8rem;
+    }
+
+    .start-chat-btn:hover {
+      background: #0f3a55;
+      transform: translateY(-2px);
+    }
+
+    /* Horizontal Scroll Section - More Products */
+    .more-products-section {
+      background: white;
+      border-radius: 24px;
+      padding: 2rem;
+      border: 1px solid #e2ecf5;
+      width: 100%;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-header h3 {
+      font-size: 1.4rem;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-header h3 i {
+      color: #1e4a6d;
+    }
+
+    .section-header a {
+      color: #1e4a6d;
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: 0.2s;
+    }
+
+    .section-header a:hover {
+      gap: 0.5rem;
+      color: #0f3a55;
+    }
+
+    .horizontal-scroll {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      padding: 0.5rem 0 1.5rem;
+      scrollbar-width: thin;
+      scroll-behavior: smooth;
+    }
+
+    .horizontal-scroll::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .horizontal-scroll::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 4px;
+    }
+
+    .horizontal-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+
+    .horizontal-scroll::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    .scroll-item {
+      flex: 0 0 220px;
+      background: white;
+      border-radius: 16px;
+      border: 1px solid #e2ecf5;
+      overflow: hidden;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+
+    .scroll-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(30,74,109,0.15);
+    }
+
+    .scroll-item-image {
+      width: 100%;
+      height: 180px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .scroll-item-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #2ecc71;
+      color: white;
+      border-radius: 30px;
+      padding: 0.2rem 0.8rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .scroll-item-info {
+      padding: 1rem;
+    }
+
+    .scroll-item-name {
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 0.3rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .scroll-item-price {
+      color: #1e4a6d;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .scroll-item-price::after {
+      content: ' RWF';
+      font-size: 0.7rem;
+      font-weight: 400;
+    }
+
+    /* Loading States */
+    .loading-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: #94a3b8;
+    }
+
+    .loading-state i {
+      font-size: 2.5rem;
+      margin-bottom: 0.8rem;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .product-not-found {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+      color: #6f8faf;
+    }
+
+    .product-not-found i {
+      font-size: 4rem;
+      margin-bottom: 1.2rem;
+      color: #cbd5e1;
+    }
+
+    .product-not-found h2 {
+      margin-bottom: 0.8rem;
+      color: #1e293b;
+      font-size: 1.5rem;
+    }
+
+    .product-not-found a {
+      display: inline-block;
+      margin-top: 1.2rem;
+      padding: 0.6rem 1.5rem;
+      background: #1e4a6d;
+      color: white;
+      text-decoration: none;
+      border-radius: 40px;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+
+    .product-not-found a:hover {
+      background: #0f3a55;
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      background: #0b2a40;
+      color: #d1dde9;
+      margin-top: 2rem;
+      padding: 2rem 2rem 1.5rem;
+      border-radius: 40px 40px 0 0;
+      width: 100%;
+    }
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-brand p {
+      font-size: 0.9rem;
+    }
+    .social-only {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .social-only a {
+      font-size: 1.5rem;
+      color: #98b1c9;
+      transition: color 0.15s;
+    }
+    .social-only a:hover {
+      color: white;
+    }
+    .copyright {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #6b89a5;
+      margin-top: 1.5rem;
+      border-top: 1px solid #1f4a6e;
+      padding-top: 1.2rem;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    @media (max-width: 1200px) {
+      .two-column-layout {
+        flex-direction: column;
+      }
+      
+      .product-panel,
+      .chat-panel {
+        width: 100%;
+        max-height: none;
+      }
+      
+      .chat-panel {
+        height: 600px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="sticky-nav">
+    <div class="nav-container">
+      <div class="logo-area">
+        <i class="fas fa-shopping-bag logo-icon"></i>
+        <div class="logo-text">GuraNeza<span>BuySmart</span></div>
+      </div>
+
+      <div class="nav-links">
+        <a href="home.html" class="nav-link">
+          <i class="fas fa-home"></i> Home
+        </a>
+        <a href="buy.html" class="nav-link active">
+          <i class="fas fa-shopping-cart"></i> Buy
+        </a>
+        <a href="sell.html" class="nav-link">
+          <i class="fas fa-plus-circle"></i> Sell
+        </a>
+        <a href="shops.html" class="nav-link">
+          <i class="fas fa-store"></i> Shops
+        </a>
+      </div>
+
+      <div class="action-group">
+        <button class="letshop-btn" onclick="window.location.href='letshop.html'" title="Let's Shop">
+          <i class="fas fa-shopping-bag"></i>
+        </button>
+
+        <button class="cart-btn" onclick="window.location.href='profile.html'" title="Cart">
+          <i class="fas fa-shopping-basket"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+
+        <div class="profile-section">
+          <div class="profile-dropdown">
+            <button class="profile-btn" onclick="window.location.href='profile.html'">
+              <div class="profile-img" id="profileImage">
+                <i class="fas fa-user-circle"></i>
+              </div>
+              <span class="profile-name" id="profileName">Guest</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dots-btn">
+            <i class="fas fa-ellipsis-v"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="#" id="helpCenterLink"><i class="fas fa-question-circle"></i> Help Center</a>
+            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            <div class="dropdown-divider"></div>
+            <div class="lang-option active" data-lang="en">
+              <i class="fas fa-language"></i> English
+            </div>
+            <div class="lang-option" data-lang="rw">
+              <i class="fas fa-language"></i> Kinyarwanda
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" id="closeModalBtn">&times;</span>
+      <h3>Help Center</h3>
+      <p><i class="fas fa-envelope"></i> <a href="mailto:guranesa@gmail.com">guranesa@gmail.com</a></p>
+      <p><i class="fas fa-phone-alt"></i> +250-789-123-456</p>
+      <p><i class="fas fa-life-ring"></i> <a href="#" id="modalHelpCenter">Frequently Asked Questions</a></p>
+      <p><i class="fab fa-tiktok"></i> <a href="https://tiktok.com/@guranesa" target="_blank">@guranesa</a></p>
+      <p><i class="fab fa-youtube"></i> <a href="https://youtube.com/@guranesa" target="_blank">@guranesa</a></p>
+    </div>
+  </div>
+
+  <!-- Full HD Image Viewer Modal -->
+  <div id="imageViewerModal" class="image-viewer-modal">
+    <div class="image-viewer-content">
+      <span class="image-viewer-close" onclick="window.closeImageViewer()">&times;</span>
+      <button class="image-viewer-nav prev" onclick="window.navigateImage(-1)" id="prevImageBtn">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <img class="image-viewer-main" id="viewerMainImage" src="" alt="Full size view">
+      <button class="image-viewer-nav next" onclick="window.navigateImage(1)" id="nextImageBtn">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+      <div class="image-viewer-counter" id="imageCounter"></div>
+    </div>
+  </div>
+
+  <div class="main-layout" id="mainLayout">
+    <!-- Two Column Layout (Product + Chat) -->
+    <div class="two-column-layout">
+      <!-- Product Panel (Left) -->
+      <div class="product-panel" id="productPanel">
+        <!-- Product content will be loaded dynamically -->
+        <div class="loading-state">
+          <i class="fas fa-spinner"></i>
+          <p>Loading product details...</p>
+        </div>
+      </div>
+
+      <!-- Chat Panel (Right) -->
+      <div class="chat-panel" id="chatPanel">
+        <!-- Chat content will be loaded dynamically -->
+        <div class="loading-state">
+          <i class="fas fa-spinner"></i>
+          <p>Loading chat...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- More Products Section (Horizontal Scroll) -->
+    <div class="more-products-section" id="moreProductsSection">
+      <div class="section-header">
+        <h3><i class="fas fa-layer-group"></i> More Products You Might Like</h3>
+        <a href="home.html">View All <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="horizontal-scroll" id="horizontalScroll">
+        <!-- Products will be loaded dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand"><p>© 2026 GuraNeza | BuySmart</p></div>
+      <div class="social-only">
+        <a href="https://tiktok.com/@guranesa" target="_blank"><i class="fab fa-tiktok"></i></a>
+        <a href="https://youtube.com/@guranesa" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="X"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+    <div class="copyright"><span>Ikiganiro cyacu: @guranesa • Follow for updates</span></div>
+  </footer>
+
+  <!-- Firebase SDKs -->
+  <script type="module">
+    // Import Firebase modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { 
+      getDatabase, 
+      ref, 
+      onValue,
+      push,
+      set,
+      query,
+      orderByChild,
+      equalTo,
+      update,
+      get
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import { 
+      getAuth, 
+      onAuthStateChanged,
+      signOut 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAr6-rTa8yQCxr41JjWysFLHeFxH0C2IMI",
+      authDomain: "guraneza-714f7.firebaseapp.com",
+      databaseURL: "https://guraneza-714f7-default-rtdb.firebaseio.com",
+      projectId: "guraneza-714f7",
+      storageBucket: "guraneza-714f7.firebasestorage.app",
+      messagingSenderId: "457107620336",
+      appId: "1:457107620336:web:1583db305b03528fcf5d35"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth(app);
+
+    // ===== GLOBAL VARIABLES =====
+    let currentUser = null;
+    let userProfile = null;
+    let currentProduct = null;
+    let currentProductId = null;
+    let currentChatPartner = null;
+    let isSeller = false;
+    let isFromShop = false;
+    let shops = [];
+    let allProducts = []; // For horizontal scroll
+    let currentImageIndex = 0;
+    let productImages = [];
+    
+    // Firebase listeners
+    let chatsListener = null;
+    let messagesListener = null;
+
+    // ===== DOM ELEMENTS =====
+    const productPanel = document.getElementById('productPanel');
+    const chatPanel = document.getElementById('chatPanel');
+    const horizontalScroll = document.getElementById('horizontalScroll');
+    const profileImg = document.getElementById('profileImage');
+    const profileName = document.getElementById('profileName');
+    const cartCountSpan = document.getElementById('cartCount');
+
+    // ===== TOAST NOTIFICATION =====
+    function showToast(message, type = 'success', duration = 3000) {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      
+      const icons = {
+        success: 'fa-check-circle',
+        error: 'fa-exclamation-circle',
+        warning: 'fa-exclamation-triangle'
+      };
+      
+      const titles = {
+        success: 'Success',
+        error: 'Error',
+        warning: 'Warning'
+      };
+      
+      toast.innerHTML = `
+        <div class="toast-icon">
+          <i class="fas ${icons[type]}"></i>
+        </div>
+        <div class="toast-content">
+          <div class="toast-title">${titles[type]}</div>
+          <div class="toast-message">${message}</div>
+        </div>
+        <div class="toast-close" onclick="this.parentElement.remove()">
+          <i class="fas fa-times"></i>
+        </div>
+      `;
+      
+      container.appendChild(toast);
+      setTimeout(() => toast.classList.add('show'), 10);
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+      }, duration);
+    }
+
+    // ===== ADD TO CART FUNCTION (Same as home page) =====
+    window.addToCart = async function(productId, event) {
+      if (event) event.stopPropagation();
+      
+      // Find the product
+      const product = allProducts.find(p => p.id === productId) || currentProduct;
+      if (!product) {
+        showToast('Product not found!', 'error');
+        return;
+      }
+
+      // Check if user is logged in
+      if (!currentUser) {
+        showToast('Please log in to add items to cart', 'warning');
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1500);
+        return;
+      }
+
+      try {
+        // Reference to user's cart in Firebase
+        const userCartRef = ref(database, `carts/${currentUser.uid}`);
+        
+        // Check if product already in cart
+        const snapshot = await get(userCartRef);
+        let existingItemId = null;
+        
+        if (snapshot.exists()) {
+          const cartData = snapshot.val();
+          for (const [key, item] of Object.entries(cartData)) {
+            if (item.id === productId) {
+              existingItemId = key;
+              break;
+            }
+          }
+        }
+        
+        if (!existingItemId) {
+          // Create cart item following the database rules
+          const cartItem = {
+            id: product.id,
+            name: product.name,
+            price: parseFloat(product.price) || 0,
+            addedAt: new Date().toISOString(),
+            category: product.category || '',
+            description: product.description || '',
+            shopId: product.shopId || '',
+            shopName: product.shopName || '',
+            verified: product.verified || false,
+            negociable: product.negociable || false
+          };
+          
+          // Add images if needed
+          if (product.images && product.images.length > 0) {
+            cartItem.images = {};
+            product.images.forEach((img, index) => {
+              if (img) cartItem.images[`image${index + 1}`] = img;
+            });
+          }
+          
+          // Add to Firebase
+          const newCartRef = push(userCartRef);
+          await set(newCartRef, cartItem);
+          
+          // Update cart count
+          await loadUserCart();
+          
+          showToast(`${product.name} has been added to your cart`, 'success');
+        } else {
+          showToast(`${product.name} is already in your cart`, 'warning');
+        }
+      } catch (error) {
+        console.error('Error adding to cart:', error);
+        showToast('Error adding product to cart: ' + error.message, 'error');
+      }
+    };
+
+    // ===== LOAD USER CART =====
+    async function loadUserCart() {
+      if (!currentUser) {
+        cartCountSpan.textContent = '0';
+        return;
+      }
+
+      try {
+        const cartRef = ref(database, `carts/${currentUser.uid}`);
+        const snapshot = await get(cartRef);
+        
+        if (snapshot.exists()) {
+          const cartData = snapshot.val();
+          const cartItems = Object.values(cartData);
+          cartCountSpan.textContent = cartItems.length;
+        } else {
+          cartCountSpan.textContent = '0';
+        }
+      } catch (error) {
+        console.error('Error loading cart:', error);
+        cartCountSpan.textContent = '0';
+      }
+    }
+
+    // ===== LOAD USER PROFILES FOR CONTACTS =====
+    const userProfilesCache = new Map();
+
+    async function loadUserProfileImage(userEmail) {
+      if (userProfilesCache.has(userEmail)) {
+        return userProfilesCache.get(userEmail);
+      }
+      
+      try {
+        const usersRef = ref(database, 'users');
+        const snapshot = await get(usersRef);
+        
+        if (snapshot.exists()) {
+          const users = snapshot.val();
+          let foundProfile = null;
+          
+          Object.keys(users).forEach(key => {
+            const user = users[key];
+            if (user.email === userEmail) {
+              foundProfile = user;
+            }
+          });
+          
+          if (foundProfile) {
+            userProfilesCache.set(userEmail, foundProfile);
+            return foundProfile;
+          }
+        }
+      } catch (error) {
+        console.error('Error loading user profile:', error);
+      }
+      
+      return null;
+    }
+
+    // ===== LOAD USER PROFILE =====
+    async function loadUserProfile() {
+      if (!currentUser) return;
+      
+      try {
+        const userRef = ref(database, `users/${currentUser.uid}`);
+        const snapshot = await get(userRef);
+        
+        if (snapshot.exists()) {
+          userProfile = snapshot.val();
+        } else {
+          userProfile = {
+            uid: currentUser.uid,
+            email: currentUser.email,
+            displayName: currentUser.displayName || currentUser.email?.split('@')[0] || 'User',
+            phone: '',
+            location: '',
+            profileImage: ''
+          };
+        }
+        
+        updateProfileSection();
+      } catch (error) {
+        console.error('Error loading user profile:', error);
+      }
+    }
+
+    // ===== UPDATE PROFILE SECTION =====
+    function updateProfileSection() {
+      if (currentUser) {
+        profileName.textContent = currentUser.displayName || currentUser.email?.split('@')[0] || 'User';
+        
+        if (userProfile?.profileImage) {
+          profileImg.innerHTML = `<img src="${userProfile.profileImage}" alt="Profile">`;
+          profileImg.style.backgroundImage = 'none';
+        } else {
+          profileImg.innerHTML = '<i class="fas fa-user-circle"></i>';
+          profileImg.style.backgroundImage = '';
+        }
+      } else {
+        profileName.textContent = 'Guest';
+        profileImg.innerHTML = '<i class="fas fa-user-circle"></i>';
+        profileImg.style.backgroundImage = '';
+      }
+    }
+
+    // ===== LOAD SHOPS =====
+    async function loadShops() {
+      try {
+        const shopsRef = ref(database, 'shops');
+        const snapshot = await get(shopsRef);
+        
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          shops = [];
+          Object.keys(data).forEach((key) => {
+            const shop = data[key];
+            shops.push({
+              id: shop.shopId || key,
+              name: shop.name || 'Unnamed Shop',
+              phone: shop.contact?.phone || '',
+              email: shop.contact?.email || '',
+              location: shop.location || '',
+              verified: shop.verified || false
+            });
+          });
+        }
+      } catch (error) {
+        console.error('Error loading shops:', error);
+      }
+    }
+
+    // ===== LOAD ALL PRODUCTS FOR HORIZONTAL SCROLL =====
+    async function loadAllProducts() {
+      try {
+        const productsRef = ref(database, 'products');
+        const snapshot = await get(productsRef);
+        
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          allProducts = [];
+          
+          Object.keys(data).forEach((key) => {
+            const product = data[key];
+            
+            // Format product
+            const images = [];
+            if (product.image1) images.push(product.image1);
+            if (product.image2) images.push(product.image2);
+            if (product.image3) images.push(product.image3);
+
+            let formattedProduct = {
+              id: product.productId || key,
+              name: product.name || 'Unnamed Product',
+              category: product.category || 'Other',
+              description: product.description || 'No description',
+              negociable: product.negotiable || false,
+              verified: product.verified || false,
+              price: parseFloat(product.price) || 0,
+              images: images,
+              timestamp: product.timestamp || new Date().toISOString(),
+              shopId: product.shopId || '',
+              shopName: product.shopName || '',
+              shopPhone: product.shopPhone || '',
+              shopLocation: product.shopLocation || ''
+            };
+
+            allProducts.push(formattedProduct);
+          });
+
+          // Sort by timestamp (newest first)
+          allProducts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+          
+          // Render horizontal scroll (exclude current product)
+          renderHorizontalScroll();
+        }
+      } catch (error) {
+        console.error('Error loading all products:', error);
+      }
+    }
+
+    // ===== RENDER HORIZONTAL SCROLL =====
+    function renderHorizontalScroll() {
+      if (!horizontalScroll) return;
+      
+      // Filter out current product if it exists
+      const otherProducts = currentProduct 
+        ? allProducts.filter(p => p.id !== currentProduct.id)
+        : allProducts;
+      
+      // Take first 20 products
+      const displayProducts = otherProducts.slice(0, 20);
+      
+      if (displayProducts.length === 0) {
+        horizontalScroll.innerHTML = '<div class="empty-state" style="width:100%; text-align:center; padding:2rem;">No other products available</div>';
+        return;
+      }
+
+      horizontalScroll.innerHTML = displayProducts.map(product => {
+        const imageUrl = product.images && product.images.length > 0 
+          ? product.images[0] 
+          : 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&auto=format';
+        
+        return `
+          <div class="scroll-item" onclick="window.location.href='?id=${product.id}'">
+            <div class="scroll-item-image" style="background-image: url('${imageUrl}')">
+              ${product.verified ? '<div class="scroll-item-badge"><i class="fas fa-check-circle"></i> Verified</div>' : ''}
+            </div>
+            <div class="scroll-item-info">
+              <div class="scroll-item-name">${product.name}</div>
+              <div class="scroll-item-price">${Number(product.price).toLocaleString()}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ===== GET PRODUCT ID FROM URL =====
+    function getProductIdFromUrl() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('id');
+    }
+
+    // ===== LOAD PRODUCT FROM FIREBASE =====
+    async function loadProduct() {
+      const productId = getProductIdFromUrl();
+      currentProductId = productId;
+
+      if (!productId) {
+        // If no product ID, try to get last viewed from localStorage
+        const lastViewed = localStorage.getItem('lastViewedProduct');
+        if (lastViewed) {
+          window.location.href = `?id=${lastViewed}`;
+          return;
+        } else {
+          productPanel.innerHTML = `
+            <div class="product-not-found">
+              <i class="fas fa-box-open"></i>
+              <h2>No Product Selected</h2>
+              <p>Browse products from our collection</p>
+              <a href="home.html">Browse Products</a>
+            </div>
+          `;
+          return;
+        }
+      }
+
+      // Save to localStorage as last viewed
+      localStorage.setItem('lastViewedProduct', productId);
+
+      productPanel.innerHTML = `
+        <div class="loading-state">
+          <i class="fas fa-spinner"></i>
+          <p>Loading product details...</p>
+        </div>
+      `;
+
+      try {
+        const productsRef = ref(database, 'products');
+        const snapshot = await get(productsRef);
+        
+        if (snapshot.exists()) {
+          const products = snapshot.val();
+          let foundProduct = null;
+          let productKey = null;
+          
+          Object.keys(products).forEach(key => {
+            const product = products[key];
+            if (product.productId === productId || product.id === productId || key === productId) {
+              foundProduct = product;
+              productKey = key;
+            }
+          });
+
+          if (foundProduct) {
+            currentProduct = await formatProduct(foundProduct, productKey);
+            productImages = currentProduct.images || [];
+            
+            // Check if current user is the seller
+            if (currentUser) {
+              isSeller = (currentProduct.seller.email === currentUser.email);
+            }
+            
+            renderProductPanel();
+            loadChats();
+          } else {
+            productPanel.innerHTML = `
+              <div class="product-not-found">
+                <i class="fas fa-exclamation-circle"></i>
+                <h2>Product Not Found</h2>
+                <p>The product you're looking for doesn't exist</p>
+                <a href="home.html">Go to Home</a>
+              </div>
+            `;
+          }
+        } else {
+          productPanel.innerHTML = `
+            <div class="product-not-found">
+              <i class="fas fa-box-open"></i>
+              <h2>No Products Available</h2>
+              <p>There are no products in the database</p>
+              <a href="home.html">Go to Home</a>
+            </div>
+          `;
+        }
+      } catch (error) {
+        console.error('Error loading product:', error);
+        productPanel.innerHTML = `
+          <div class="product-not-found">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h2>Error Loading Product</h2>
+            <p>Please try again later</p>
+          </div>
+        `;
+      }
+    }
+
+    // ===== FORMAT PRODUCT DATA =====
+    async function formatProduct(product, key) {
+      const images = [];
+      if (product.image1) images.push(product.image1);
+      if (product.image2) images.push(product.image2);
+      if (product.image3) images.push(product.image3);
+
+      const hasShopId = !!product.shopId;
+      
+      let sellerInfo = {};
+      
+      if (hasShopId) {
+        isFromShop = true;
+        
+        let shop = shops.find(s => s.id === product.shopId);
+        
+        if (shop) {
+          sellerInfo = {
+            name: shop.name,
+            phone: shop.phone,
+            email: shop.email,
+            location: shop.location,
+            shopId: product.shopId,
+            isShop: true
+          };
+        } else {
+          sellerInfo = {
+            name: product.shopName || 'Unknown Shop',
+            phone: product.shopPhone || 'N/A',
+            email: product.shopEmail || '',
+            location: product.shopLocation || 'N/A',
+            shopId: product.shopId,
+            isShop: true
+          };
+        }
+      } else {
+        isFromShop = false;
+        
+        if (product.seller) {
+          sellerInfo = {
+            name: product.seller.name || 'Unknown Seller',
+            phone: product.seller.phone || 'N/A',
+            email: product.seller.email || '',
+            location: product.seller.location || 'N/A',
+            isShop: false
+          };
+        } else {
+          sellerInfo = {
+            name: product.sellerName || product.postedBy || 'Unknown Seller',
+            phone: product.sellerPhone || 'N/A',
+            email: product.sellerEmail || '',
+            location: product.sellerLocation || 'N/A',
+            isShop: false
+          };
+        }
+      }
+
+      return {
+        firebaseKey: key,
+        id: product.productId || key,
+        name: product.name || 'Unnamed Product',
+        category: product.category || 'Other',
+        description: product.description || 'No description',
+        negociable: product.negotiable || false,
+        verified: product.verified || false,
+        price: product.price || 0,
+        images: images,
+        seller: sellerInfo,
+        postedBy: sellerInfo.name,
+        postedByEmail: sellerInfo.email,
+        timestamp: product.timestamp || new Date().toISOString(),
+        isFromShop: hasShopId,
+        shopId: product.shopId || null
+      };
+    }
+
+    // ===== VISIT SHOP FUNCTION =====
+    window.visitShop = function() {
+      if (currentProduct && currentProduct.shopId) {
+        window.location.href = `letshop.html?shop=${currentProduct.shopId}`;
+      }
+    };
+
+    // ===== OPEN IMAGE VIEWER =====
+    window.openImageViewer = function(index) {
+      if (!productImages || productImages.length === 0) return;
+      
+      currentImageIndex = index;
+      const modal = document.getElementById('imageViewerModal');
+      const mainImage = document.getElementById('viewerMainImage');
+      const counter = document.getElementById('imageCounter');
+      const prevBtn = document.getElementById('prevImageBtn');
+      const nextBtn = document.getElementById('nextImageBtn');
+      
+      mainImage.src = productImages[currentImageIndex];
+      counter.textContent = `${currentImageIndex + 1} / ${productImages.length}`;
+      
+      // Enable/disable navigation buttons
+      prevBtn.disabled = currentImageIndex === 0;
+      nextBtn.disabled = currentImageIndex === productImages.length - 1;
+      
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    };
+
+    // ===== CLOSE IMAGE VIEWER =====
+    window.closeImageViewer = function() {
+      const modal = document.getElementById('imageViewerModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+
+    // ===== NAVIGATE IMAGES =====
+    window.navigateImage = function(direction) {
+      const newIndex = currentImageIndex + direction;
+      if (newIndex >= 0 && newIndex < productImages.length) {
+        currentImageIndex = newIndex;
+        const mainImage = document.getElementById('viewerMainImage');
+        const counter = document.getElementById('imageCounter');
+        const prevBtn = document.getElementById('prevImageBtn');
+        const nextBtn = document.getElementById('nextImageBtn');
+        
+        mainImage.src = productImages[currentImageIndex];
+        counter.textContent = `${currentImageIndex + 1} / ${productImages.length}`;
+        
+        prevBtn.disabled = currentImageIndex === 0;
+        nextBtn.disabled = currentImageIndex === productImages.length - 1;
+      }
+    };
+
+    // ===== RENDER PRODUCT PANEL =====
+    function renderProductPanel() {
+      const seller = currentProduct.seller;
+      const images = currentProduct.images || [];
+      const isShop = currentProduct.isFromShop;
+
+      // Build image gallery HTML
+      let imageGalleryHtml = '';
+      
+      if (images.length > 0) {
+        let thumbnailsHtml = '';
+        images.forEach((img, index) => {
+          thumbnailsHtml += `
+            <div class="image-thumbnail ${index === 0 ? 'active' : ''}" 
+                 style="background-image: url('${img}')" 
+                 onclick="window.changeMainImage(this, '${img}', ${index})"></div>
+          `;
+        });
+
+        imageGalleryHtml = `
+          <div class="product-images-section">
+            <div class="main-image-container" onclick="window.openImageViewer(0)">
+              <div class="main-image" id="mainImage" style="background-image: url('${images[0]}')"></div>
+            </div>
+            <div class="image-thumbnails">
+              ${thumbnailsHtml}
+            </div>
+          </div>
+        `;
+      } else {
+        imageGalleryHtml = `
+          <div class="product-images-section">
+            <div class="no-images">
+              <div style="text-align: center;">
+                <i class="fas fa-image"></i>
+                <p>No images available</p>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // Seller type badge
+      const sellerTypeBadge = isShop 
+        ? '<span class="badge shop" onclick="visitShop()"><i class="fas fa-store"></i> Visit Shop →</span>'
+        : '<span class="badge individual"><i class="fas fa-user"></i> Individual Seller</span>';
+
+      // Product info HTML
+      const productInfoHtml = `
+        <div class="product-info-section">
+          <h1 class="product-title">${currentProduct.name}</h1>
+          
+          <div class="product-badges">
+            ${sellerTypeBadge}
+            ${currentProduct.verified ? '<span class="badge verified"><i class="fas fa-check-circle"></i> Verified</span>' : ''}
+            ${currentProduct.negociable 
+              ? '<span class="badge negotiable"><i class="fas fa-handshake"></i> Negotiable</span>'
+              : ''
+            }
+          </div>
+
+          <div class="product-price">
+            ${Number(currentProduct.price).toLocaleString()}
+          </div>
+
+          <div class="product-category">
+            <i class="fas fa-folder"></i> ${currentProduct.category || 'Uncategorized'}
+          </div>
+
+          <button class="add-to-cart-large" onclick="addToCart('${currentProduct.id}', event)">
+            <i class="fas fa-shopping-cart"></i> Add to Cart
+          </button>
+
+          <div class="product-description">
+            ${currentProduct.description || 'No description provided.'}
+          </div>
+
+          <div class="seller-info">
+            <h3><i class="fas fa-${isShop ? 'store' : 'user-circle'}"></i> ${isShop ? 'Shop Information' : 'Seller Information'}</h3>
+            <div class="seller-grid">
+              <div class="seller-item">
+                <span class="seller-label">Name</span>
+                <span class="seller-value"><i class="fas fa-${isShop ? 'store' : 'user-circle'}"></i> ${seller.name}</span>
+              </div>
+              <div class="seller-item">
+                <span class="seller-label">Phone</span>
+                <span class="seller-value"><i class="fas fa-phone"></i> ${seller.phone || 'N/A'}</span>
+              </div>
+              <div class="seller-item">
+                <span class="seller-label">Email</span>
+                <span class="seller-value"><i class="fas fa-envelope"></i> ${seller.email || 'N/A'}</span>
+              </div>
+              <div class="seller-item">
+                <span class="seller-label">Location</span>
+                <span class="seller-value"><i class="fas fa-map-marker-alt"></i> ${seller.location || 'N/A'}</span>
+              </div>
+            </div>
+            ${isShop ? `
+              <button class="visit-shop-btn" onclick="visitShop()">
+                <i class="fas fa-store"></i> Visit Shop
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            ` : ''}
+          </div>
+        </div>
+      `;
+
+      productPanel.innerHTML = imageGalleryHtml + productInfoHtml;
+    }
+
+    // ===== CHANGE MAIN IMAGE =====
+    window.changeMainImage = function(element, imageUrl, index) {
+      const mainImage = document.getElementById('mainImage');
+      if (mainImage) {
+        mainImage.style.backgroundImage = `url('${imageUrl}')`;
+      }
+      
+      document.querySelectorAll('.image-thumbnail').forEach(thumb => {
+        thumb.classList.remove('active');
+      });
+      element.classList.add('active');
+      
+      // Update current image index for viewer
+      currentImageIndex = index;
+    };
+
+    // ===== CHAT FUNCTIONS =====
+
+    function loadChats() {
+      if (!currentUser || !currentProduct) {
+        showEmptyChatPanel();
+        return;
+      }
+
+      if (chatsListener) {
+        chatsListener();
+      }
+
+      const chatsRef = ref(database, 'chats');
+      
+      const productChatsQuery = query(
+        chatsRef,
+        orderByChild('productId'),
+        equalTo(currentProduct.id)
+      );
+
+      chatsListener = onValue(productChatsQuery, (snapshot) => {
+        if (snapshot.exists()) {
+          const chats = snapshot.val();
+          processChats(chats);
+        } else {
+          showEmptyChatPanel();
+        }
+      }, (error) => {
+        console.error('Error loading chats:', error);
+        showEmptyChatPanel();
+      });
+    }
+
+    async function processChats(chats) {
+      const userEmail = currentUser.email;
+      const sellerEmail = currentProduct.seller.email;
+      
+      const chatsArray = Object.values(chats);
+      
+      let relevantChats = [];
+      
+      if (isSeller) {
+        relevantChats = chatsArray.filter(chat => 
+          chat.productId === currentProduct.id
+        );
+      } else {
+        relevantChats = chatsArray.filter(chat => 
+          chat.productId === currentProduct.id &&
+          ((chat.sender === userEmail && chat.receiver === sellerEmail) ||
+           (chat.sender === sellerEmail && chat.receiver === userEmail))
+        );
+      }
+
+      const contactsMap = new Map();
+      
+      for (const chat of relevantChats) {
+        let otherParticipant;
+        if (isSeller) {
+          otherParticipant = chat.sender === userEmail ? chat.receiver : chat.sender;
+        } else {
+          otherParticipant = sellerEmail;
+        }
+        
+        if (!contactsMap.has(otherParticipant)) {
+          const profile = await loadUserProfileImage(otherParticipant);
+          
+          contactsMap.set(otherParticipant, {
+            username: otherParticipant,
+            lastMessage: chat.message,
+            timestamp: chat.timestamp,
+            productName: chat.productName || currentProduct.name,
+            unread: (chat.receiver === userEmail && !chat.read),
+            profileImage: profile?.profileImage || ''
+          });
+        } else {
+          const existing = contactsMap.get(otherParticipant);
+          if (new Date(chat.timestamp) > new Date(existing.timestamp)) {
+            existing.lastMessage = chat.message;
+            existing.timestamp = chat.timestamp;
+            existing.unread = (chat.receiver === userEmail && !chat.read);
+          }
+        }
+      }
+
+      const chatContacts = Array.from(contactsMap.values()).sort((a, b) => 
+        new Date(b.timestamp) - new Date(a.timestamp)
+      );
+
+      renderChatPanel(chatContacts);
+    }
+
+    function showEmptyChatPanel() {
+      const sellerEmail = currentProduct?.seller?.email;
+      const isOwnProduct = (sellerEmail === currentUser?.email);
+      
+      chatPanel.innerHTML = `
+        <div class="chat-header">
+          <h2><i class="fas fa-comments"></i> Messages</h2>
+          <div class="chat-actions">
+            <button class="chat-action-btn" onclick="window.refreshChats()" title="Refresh">
+              <i class="fas fa-sync-alt"></i>
+            </button>
+          </div>
+        </div>
+        <div class="no-contact-selected">
+          <i class="fas fa-comments"></i>
+          <p>No conversations yet</p>
+          ${!isOwnProduct && currentProduct ? `
+            <button class="start-chat-btn" onclick="window.startChatWithSeller()">
+              <i class="fas fa-comment"></i> Start Chat with ${currentProduct?.isFromShop ? 'Shop' : 'Seller'}
+            </button>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    function renderChatPanel(chatContacts) {
+      if (chatContacts.length === 0) {
+        showEmptyChatPanel();
+        return;
+      }
+
+      chatPanel.innerHTML = `
+        <div class="chat-header">
+          <h2><i class="fas fa-comments"></i> Messages</h2>
+          <div class="chat-actions">
+            <button class="chat-action-btn" onclick="window.refreshChats()" title="Refresh">
+              <i class="fas fa-sync-alt"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="chat-container">
+          <div class="contacts-sidebar">
+            <div class="contacts-search">
+              <input type="text" id="contactSearch" placeholder="Search contacts..." oninput="window.filterContacts()">
+            </div>
+            <div class="contacts-list" id="contactsList">
+              ${renderContactsList(chatContacts)}
+            </div>
+          </div>
+
+          <div class="messages-area" id="messagesArea">
+            ${currentChatPartner ? renderMessagesArea() : renderNoContactSelected()}
+          </div>
+        </div>
+      `;
+
+      if (currentChatPartner) {
+        loadMessages();
+      } else if (chatContacts.length > 0) {
+        setTimeout(() => {
+          window.selectContact(chatContacts[0].username);
+        }, 100);
+      }
+    }
+
+    function renderContactsList(chatContacts) {
+      return chatContacts.map(contact => {
+        const avatarHtml = contact.profileImage 
+          ? `<div class="contact-avatar"><img src="${contact.profileImage}" alt="${contact.username}"></div>`
+          : `<div class="contact-avatar"><i class="fas fa-user-circle"></i></div>`;
+        
+        return `
+          <div class="contact-item ${currentChatPartner === contact.username ? 'active' : ''} ${contact.unread ? 'unread' : ''}" 
+               onclick="window.selectContact('${contact.username}')">
+            ${avatarHtml}
+            <div class="contact-info">
+              <div class="contact-header">
+                <span class="contact-name">${contact.username}</span>
+                <span class="contact-time">${formatTime(contact.timestamp)}</span>
+              </div>
+              <div class="contact-product">
+                <i class="fas fa-tag"></i> ${contact.productName || currentProduct?.name}
+              </div>
+              <div class="contact-last-message">${contact.lastMessage}</div>
+            </div>
+            ${contact.unread ? '<span class="unread-badge">New</span>' : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderMessagesArea() {
+      return `
+        <div class="messages-header">
+          <div class="messages-header-avatar">
+            ${currentChatPartner?.charAt(0).toUpperCase() || ''}
+          </div>
+          <div class="messages-header-info">
+            <div class="messages-header-name">${currentChatPartner}</div>
+            <div class="messages-header-product">
+              <i class="fas fa-tag"></i> ${currentProduct?.name}
+            </div>
+          </div>
+        </div>
+        <div class="messages-container" id="messagesContainer"></div>
+        <div class="message-input-area">
+          <input type="text" class="message-input" id="messageInput" 
+                 placeholder="Type your message..." 
+                 onkeypress="if(event.key === 'Enter') window.sendMessage()">
+          <button class="message-send-btn" onclick="window.sendMessage()">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      `;
+    }
+
+    function renderNoContactSelected() {
+      return `
+        <div class="no-contact-selected">
+          <i class="fas fa-comment-dots"></i>
+          <p>Select a contact to start chatting</p>
+        </div>
+      `;
+    }
+
+    function renderNoMessages() {
+      return `
+        <div class="no-messages">
+          <i class="fas fa-comment"></i>
+          <p>No messages yet. Start the conversation!</p>
+        </div>
+      `;
+    }
+
+    function formatTime(timestamp) {
+      const date = new Date(timestamp);
+      const now = new Date();
+      const diff = now - date;
+      
+      if (diff < 24 * 60 * 60 * 1000) {
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      } else {
+        return date.toLocaleDateString([], { month: 'short', day: 'numeric' });
+      }
+    }
+
+    window.selectContact = function(username) {
+      currentChatPartner = username;
+      
+      const contactItems = document.querySelectorAll('.contact-item');
+      contactItems.forEach(item => {
+        const name = item.querySelector('.contact-name')?.textContent;
+        if (name === username) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+      
+      const messagesArea = document.getElementById('messagesArea');
+      if (messagesArea) {
+        messagesArea.innerHTML = renderMessagesArea();
+      }
+      
+      loadMessages();
+      markMessagesAsRead(username);
+    };
+
+    function loadMessages() {
+      if (!currentUser || !currentProduct || !currentChatPartner) return;
+
+      if (messagesListener) {
+        messagesListener();
+      }
+
+      const messagesRef = ref(database, 'chats');
+      
+      const messagesQuery = query(
+        messagesRef,
+        orderByChild('productId'),
+        equalTo(currentProduct.id)
+      );
+
+      messagesListener = onValue(messagesQuery, (snapshot) => {
+        if (snapshot.exists()) {
+          const chats = snapshot.val();
+          
+          const messages = Object.values(chats)
+            .filter(chat => 
+              chat.productId === currentProduct.id &&
+              ((chat.sender === currentUser.email && chat.receiver === currentChatPartner) ||
+               (chat.sender === currentChatPartner && chat.receiver === currentUser.email))
+            )
+            .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+          const messagesContainer = document.getElementById('messagesContainer');
+          if (messagesContainer) {
+            if (messages.length === 0) {
+              messagesContainer.innerHTML = renderNoMessages();
+            } else {
+              messagesContainer.innerHTML = messages.map(msg => `
+                <div class="message ${msg.sender === currentUser.email ? 'sent' : 'received'}">
+                  <div class="message-bubble">${msg.message}</div>
+                  <div class="message-time">
+                    ${new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    ${msg.sender === currentUser.email ? '<span class="message-status"><i class="fas fa-check-double"></i></span>' : ''}
+                  </div>
+                </div>
+              `).join('');
+            }
+
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+          }
+        } else {
+          const messagesContainer = document.getElementById('messagesContainer');
+          if (messagesContainer) {
+            messagesContainer.innerHTML = renderNoMessages();
+          }
+        }
+      });
+    }
+
+    async function markMessagesAsRead(contactUsername) {
+      if (!currentUser || !currentProduct) return;
+
+      const messagesRef = ref(database, 'chats');
+      const snapshot = await get(query(
+        messagesRef,
+        orderByChild('productId'),
+        equalTo(currentProduct.id)
+      ));
+
+      if (snapshot.exists()) {
+        const updates = {};
+        snapshot.forEach(childSnapshot => {
+          const chat = childSnapshot.val();
+          if (chat.receiver === currentUser.email && 
+              chat.sender === contactUsername && 
+              !chat.read) {
+            updates[`${childSnapshot.key}/read`] = true;
+          }
+        });
+
+        if (Object.keys(updates).length > 0) {
+          await update(ref(database), updates);
+        }
+      }
+    }
+
+    window.sendMessage = async function() {
+      const input = document.getElementById('messageInput');
+      const message = input.value.trim();
+
+      if (!message || !currentChatPartner || !currentUser || !currentProduct) {
+        showToast('Cannot send message', 'error');
+        return;
+      }
+
+      try {
+        const chatsRef = ref(database, 'chats');
+        const newMessageRef = push(chatsRef);
+        
+        const newMessage = {
+          sender: currentUser.email,
+          receiver: currentChatPartner,
+          message: message,
+          timestamp: new Date().toISOString(),
+          productId: currentProduct.id,
+          productName: currentProduct.name,
+          read: false
+        };
+
+        await set(newMessageRef, newMessage);
+
+        input.value = '';
+        showToast('Message sent');
+
+      } catch (error) {
+        console.error('Error sending message:', error);
+        showToast('Error sending message: ' + error.message, 'error');
+      }
+    };
+
+    window.startChatWithSeller = async function() {
+      if (!currentProduct || !currentUser) {
+        showToast('Please log in to start a chat', 'warning');
+        return;
+      }
+
+      const sellerEmail = currentProduct.seller?.email;
+      
+      if (!sellerEmail) {
+        showToast('Seller email not available', 'error');
+        return;
+      }
+
+      if (sellerEmail === currentUser.email) {
+        showToast('You cannot chat with yourself', 'warning');
+        return;
+      }
+
+      try {
+        const chatsRef = ref(database, 'chats');
+        const snapshot = await get(query(
+          chatsRef,
+          orderByChild('productId'),
+          equalTo(currentProduct.id)
+        ));
+
+        let chatExists = false;
+        if (snapshot.exists()) {
+          snapshot.forEach(childSnapshot => {
+            const chat = childSnapshot.val();
+            if ((chat.sender === currentUser.email && chat.receiver === sellerEmail) ||
+                (chat.sender === sellerEmail && chat.receiver === currentUser.email)) {
+              chatExists = true;
+            }
+          });
+        }
+
+        if (!chatExists) {
+          const newMessageRef = push(chatsRef);
+          const welcomeMessage = {
+            sender: currentUser.email,
+            receiver: sellerEmail,
+            message: `Hello, I'm interested in your product: ${currentProduct.name}`,
+            timestamp: new Date().toISOString(),
+            productId: currentProduct.id,
+            productName: currentProduct.name,
+            read: false
+          };
+          await set(newMessageRef, welcomeMessage);
+          showToast('Chat started successfully');
+        }
+
+        currentChatPartner = sellerEmail;
+        loadChats();
+
+      } catch (error) {
+        console.error('Error starting chat:', error);
+        showToast('Error starting chat: ' + error.message, 'error');
+      }
+    };
+
+    window.refreshChats = function() {
+      loadChats();
+      showToast('Chats refreshed');
+    };
+
+    window.filterContacts = function() {
+      const searchTerm = document.getElementById('contactSearch')?.value.toLowerCase() || '';
+      const contactItems = document.querySelectorAll('.contact-item');
+      
+      contactItems.forEach(item => {
+        const name = item.querySelector('.contact-name')?.textContent.toLowerCase() || '';
+        const product = item.querySelector('.contact-product')?.textContent.toLowerCase() || '';
+        
+        if (name.includes(searchTerm) || product.includes(searchTerm)) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    };
+
+    // ===== AUTHENTICATION =====
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        currentUser = user;
+        await loadUserProfile();
+        await loadUserCart();
+        await loadShops();
+        await loadAllProducts();
+        await loadProduct();
+      } else {
+        currentUser = null;
+        userProfile = null;
+        updateProfileSection();
+        cartCountSpan.textContent = '0';
+        await loadAllProducts();
+        await loadProduct();
+      }
+    });
+
+    // ===== LOGOUT =====
+    document.getElementById('logoutBtn').addEventListener('click', async (e) => {
+      e.preventDefault();
+      try {
+        await signOut(auth);
+        showToast('Logged out successfully');
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1500);
+      } catch (error) {
+        console.error('Logout error:', error);
+        showToast('Error logging out', 'error');
+      }
+    });
+
+    // ===== INITIALIZATION =====
+    document.addEventListener('DOMContentLoaded', function() {
+      // Modal functionality
+      const modal = document.getElementById('contactModal');
+      const helpLink = document.getElementById('helpCenterLink');
+      const closeBtn = document.getElementById('closeModalBtn');
+      
+      if (helpLink) {
+        helpLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          modal.classList.add('active');
+        });
+      }
+      
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+          modal.classList.remove('active');
+        });
+      }
+      
+      window.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+        }
+      });
+      
+      document.getElementById('modalHelpCenter')?.addEventListener('click', function(e) {
+        e.preventDefault();
+        showToast('FAQ page coming soon', 'warning');
+      });
+
+      // Keyboard navigation for image viewer
+      document.addEventListener('keydown', function(e) {
+        const modal = document.getElementById('imageViewerModal');
+        if (modal.classList.contains('active')) {
+          if (e.key === 'Escape') {
+            window.closeImageViewer();
+          } else if (e.key === 'ArrowLeft') {
+            window.navigateImage(-1);
+          } else if (e.key === 'ArrowRight') {
+            window.navigateImage(1);
+          }
+        }
+      });
+
+      // Language toggle
+      const langOptions = document.querySelectorAll('.lang-option');
+      
+      function setLanguage(lang) {
+        localStorage.setItem('guraneza_lang', lang);
+        langOptions.forEach(opt => {
+          if (opt.dataset.lang === lang) {
+            opt.classList.add('active');
+          } else {
+            opt.classList.remove('active');
+          }
+        });
+      }
+      
+      const savedLang = localStorage.getItem('guraneza_lang') || 'en';
+      setLanguage(savedLang);
+      
+      langOptions.forEach(opt => {
+        opt.addEventListener('click', () => setLanguage(opt.dataset.lang));
+      });
+    });
+
+    // Clean up listeners on page unload
+    window.addEventListener('beforeunload', () => {
+      if (chatsListener) chatsListener();
+      if (messagesListener) messagesListener();
+    });
+
+  </script>
+</body>
+</html>

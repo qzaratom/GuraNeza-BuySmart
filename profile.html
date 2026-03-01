@@ -1,0 +1,2267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GuraNeza | BuySmart – My Profile</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body { background: #f8fafd; color: #1e1e2f; line-height: 1.5; }
+
+    /* ===== PROFESSIONAL STICKY NAVIGATION ===== */
+    .sticky-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+      border-bottom: 1px solid #edf2f7;
+    }
+    
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    /* Logo area - refined */
+    .logo-area { 
+      display: flex; 
+      align-items: center; 
+      gap: 0.6rem; 
+      flex-shrink: 0;
+    }
+    
+    .logo-icon { 
+      font-size: 1.8rem; 
+      color: #1e4a6d; 
+    }
+    
+    .logo-text { 
+      font-weight: 700; 
+      font-size: 1.3rem; 
+      letter-spacing: -0.02em; 
+      color: #1a2b3c;
+    }
+    
+    .logo-text span { 
+      color: #1e4a6d; 
+      font-weight: 600; 
+      background: #e1effa;
+      padding: 0.2rem 0.5rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      margin-left: 0.3rem;
+    }
+
+    /* Navigation links - centered */
+    .nav-links { 
+      display: flex; 
+      gap: 0.5rem; 
+      align-items: center; 
+      margin: 0 1rem;
+    }
+    
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #4a5b6b;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 40px;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
+    
+    .nav-link i {
+      color: #6f8faf;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    
+    .nav-link:hover {
+      background: #f0f7ff;
+      color: #1e4a6d;
+    }
+    
+    .nav-link:hover i {
+      color: #1e4a6d;
+    }
+    
+    .nav-link.active {
+      background: #1e4a6d;
+      color: white;
+    }
+    
+    .nav-link.active i {
+      color: white;
+    }
+
+    /* Action buttons group - right side */
+    .action-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    /* Let's Shop Icon Button */
+    .letshop-btn {
+      background: #ffd966;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      color: #1e4a6d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2s;
+      border: 1px solid #f0c45a;
+    }
+    
+    .letshop-btn:hover {
+      background: #f0c45a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Cart button - icon only */
+    .cart-btn {
+      background: #e1effa;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      color: #1e4a6d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2s;
+      border: 1px solid #c9e0fa;
+      position: relative;
+    }
+    
+    .cart-btn:hover {
+      background: #c9e0f7;
+      transform: translateY(-2px);
+    }
+    
+    .cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #1e4a6d;
+      color: white;
+      border-radius: 30px;
+      padding: 0.15rem 0.4rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      border: 2px solid white;
+    }
+
+    /* Profile section - compact */
+    .profile-section {
+      display: flex;
+      align-items: center;
+    }
+    
+    .profile-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.2rem 0.5rem 0.2rem 0.2rem;
+      border-radius: 40px;
+      transition: 0.2s;
+      height: 44px;
+    }
+    
+    .profile-btn:hover {
+      background: #f0f8ff;
+    }
+    
+    .profile-img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #e9f2fc;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1f6eaf;
+      font-size: 1.3rem;
+      border: 2px solid white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    
+    .profile-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .profile-name {
+      font-weight: 600;
+      color: #1e3e5c;
+      font-size: 0.9rem;
+      max-width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Three dots dropdown - contains language switch */
+    .dropdown {
+      position: relative;
+      margin-left: 0.2rem;
+    }
+    
+    .dots-btn {
+      background: transparent;
+      border: none;
+      font-size: 1.3rem;
+      color: #4a5d6e;
+      cursor: pointer;
+      padding: 0.3rem;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+    }
+    
+    .dots-btn:hover {
+      background: #e1effa;
+      color: #1e4a6d;
+    }
+    
+    .dropdown-content {
+      position: absolute;
+      top: 3.2rem;
+      right: 0;
+      background: white;
+      min-width: 200px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+      border-radius: 1rem;
+      padding: 0.5rem 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.2s ease;
+      border: 1px solid #e2ecf5;
+      z-index: 100;
+    }
+    
+    .dropdown:hover .dropdown-content {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .dropdown-content a {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.8rem 1.5rem;
+      text-decoration: none;
+      color: #1e3e5c;
+      font-size: 0.9rem;
+      transition: 0.1s;
+    }
+    
+    .dropdown-content a i {
+      color: #1f6eaf;
+      width: 20px;
+      font-size: 1rem;
+    }
+    
+    .dropdown-content a:hover {
+      background: #f0f8ff;
+    }
+
+    /* Language switch inside dropdown */
+    .dropdown-divider {
+      height: 1px;
+      background: #e2ecf5;
+      margin: 0.5rem 1rem;
+    }
+
+    .lang-option {
+      padding: 0.5rem 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: #4a5d6e;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      transition: 0.1s;
+    }
+
+    .lang-option i {
+      color: #1f6eaf;
+      width: 20px;
+      font-size: 1rem;
+    }
+
+    .lang-option:hover {
+      background: #f0f8ff;
+    }
+
+    .lang-option.active {
+      background: #e1effa;
+      color: #1e4a6d;
+      font-weight: 600;
+    }
+
+    .lang-option.active i {
+      color: #1e4a6d;
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .toast {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      padding: 14px 20px;
+      min-width: 300px;
+      max-width: 400px;
+      transform: translateX(120%);
+      transition: transform 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      pointer-events: auto;
+      border-left: 4px solid #2ecc71;
+    }
+
+    .toast.show {
+      transform: translateX(0);
+    }
+
+    .toast-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #2ecc71;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+    }
+
+    .toast-content {
+      flex: 1;
+    }
+
+    .toast-title {
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 2px;
+      font-size: 0.9rem;
+    }
+
+    .toast-message {
+      color: #64748b;
+      font-size: 0.8rem;
+    }
+
+    .toast-close {
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 4px;
+    }
+
+    .toast.error {
+      border-left-color: #ef4444;
+    }
+    .toast.error .toast-icon {
+      background: #ef4444;
+    }
+
+    .toast.warning {
+      border-left-color: #f59e0b;
+    }
+    .toast.warning .toast-icon {
+      background: #f59e0b;
+    }
+
+    /* Confirmation Modal */
+    .confirm-modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+    }
+    .confirm-modal.active { display: flex; }
+    .confirm-modal-content {
+      background: white;
+      max-width: 400px;
+      width: 90%;
+      padding: 2rem;
+      border-radius: 24px;
+      box-shadow: 0 30px 50px rgba(0,0,0,0.2);
+      position: relative;
+      text-align: center;
+    }
+    .confirm-modal-content i {
+      font-size: 3rem;
+      color: #ef4444;
+      margin-bottom: 1rem;
+    }
+    .confirm-modal-content h3 {
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+    .confirm-modal-content p {
+      color: #64748b;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+    .confirm-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .confirm-btn {
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .confirm-btn.cancel {
+      background: #f1f5f9;
+      color: #475569;
+    }
+    .confirm-btn.cancel:hover {
+      background: #e2e8f0;
+    }
+    .confirm-btn.delete {
+      background: #ef4444;
+      color: white;
+    }
+    .confirm-btn.delete:hover {
+      background: #dc2626;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3);
+    }
+
+    /* Loading Spinner */
+    .loading-spinner {
+      text-align: center; padding: 3rem;
+    }
+    .spinner {
+      display: inline-block; width: 50px; height: 50px;
+      border: 4px solid #e2ecf5; border-radius: 50%;
+      border-top-color: #1e4a6d; animation: spin 1s ease-in-out infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 200;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.active { display: flex; }
+    .modal-content {
+      background: white;
+      max-width: 450px;
+      width: 90%;
+      padding: 2rem;
+      border-radius: 32px;
+      box-shadow: 0 30px 50px rgba(0,0,0,0.2);
+      position: relative;
+    }
+    .modal-content h3 {
+      font-size: 1.6rem;
+      color: #0b2a40;
+      margin-bottom: 1.2rem;
+    }
+    .modal-content p {
+      margin: 0.8rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1rem;
+    }
+    .modal-content i {
+      width: 2rem;
+      color: #1e4a6d;
+      font-size: 1.2rem;
+    }
+    .modal-content a {
+      color: #1e4a6d;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .close-modal {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #7f8fa3;
+    }
+    .close-modal:hover {
+      color: #1e4a6d;
+    }
+
+    /* Main container */
+    .container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    .profile-header {
+      margin-bottom: 2rem;
+    }
+    
+    .profile-header h1 {
+      font-size: 2.2rem;
+      color: #0b2a40;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .profile-header h1 i {
+      color: #1e4a6d;
+      background: #e1effa;
+      padding: 1rem;
+      border-radius: 50%;
+    }
+
+    .profile-card {
+      background: white;
+      border-radius: 32px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      border: 1px solid #edf2f7;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .cover-photo {
+      height: 200px;
+      background: linear-gradient(135deg, #1e4a6d 0%, #2c6b9e 100%);
+      position: relative;
+      background-image: url('https://images.unsplash.com/photo-1557683311-eac922347aa1?w=1200&auto=format');
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .cover-photo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.3);
+    }
+
+    .profile-avatar-section {
+      display: flex;
+      padding: 0 2rem 2rem;
+      position: relative;
+    }
+
+    .avatar-container {
+      position: relative;
+      margin-top: -60px;
+      margin-right: 2rem;
+    }
+
+    .profile-avatar {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: #e9f2fc;
+      border: 5px solid white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      color: #1f6eaf;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .profile-avatar:hover {
+      filter: brightness(0.9);
+    }
+
+    .profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .avatar-upload-overlay {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: #1e4a6d;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 3px solid white;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .avatar-upload-overlay:hover {
+      background: #0f3a55;
+      transform: scale(1.1);
+    }
+
+    .avatar-upload-overlay i {
+      font-size: 1.2rem;
+    }
+
+    #avatarUpload {
+      display: none;
+    }
+
+    .profile-title {
+      flex: 1;
+      padding-top: 1rem;
+    }
+
+    .profile-title h2 {
+      font-size: 2rem;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-title p {
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .profile-title p i {
+      color: #1e4a6d;
+      width: 20px;
+    }
+
+    .profile-content {
+      padding: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      color: #1e293b;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      border-bottom: 2px solid #e2ecf5;
+      padding-bottom: 0.8rem;
+    }
+
+    .section-title i {
+      color: #1e4a6d;
+    }
+
+    /* Single stat card styling - simplified */
+    .stats-single {
+      max-width: 280px;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-card {
+      background: #f8fafd;
+      border-radius: 20px;
+      padding: 1.5rem;
+      text-align: center;
+      border: 1px solid #e2ecf5;
+      transition: transform 0.2s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+    }
+
+    .stat-icon {
+      width: 60px;
+      height: 60px;
+      background: #e1effa;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: #1e4a6d;
+      font-size: 1.8rem;
+    }
+
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1e4a6d;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      color: #64748b;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* Cart Table Styles */
+    .cart-section {
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .cart-table-container {
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      border: 1px solid #e2ecf5;
+      overflow: hidden;
+    }
+
+    .cart-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .cart-table th {
+      background: #f8fafd;
+      color: #1e3e5c;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 2px solid #e2ecf5;
+    }
+
+    .cart-table td {
+      padding: 1rem;
+      border-bottom: 1px solid #edf2f7;
+      color: #1e293b;
+      font-size: 0.95rem;
+      vertical-align: middle;
+    }
+
+    .cart-table tr:hover td {
+      background: #f8fafd;
+    }
+
+    .cart-product-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      background-size: cover;
+      background-position: center;
+      background-color: #e9f2fc;
+    }
+
+    .cart-product-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .cart-product-name {
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .cart-product-category {
+      font-size: 0.8rem;
+      color: #6b89a5;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .cart-product-category i {
+      color: #1e4a6d;
+      font-size: 0.7rem;
+    }
+
+    .cart-seller-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 0.85rem;
+    }
+
+    .cart-seller-name {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: #1e4a6d;
+    }
+
+    .cart-seller-name i {
+      font-size: 0.7rem;
+    }
+
+    .cart-price {
+      font-weight: 700;
+      color: #1e4a6d;
+    }
+
+    .cart-price::after {
+      content: ' RWF';
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #6b89a5;
+    }
+
+    .cart-added-date {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .cart-added-date i {
+      color: #1e4a6d;
+      font-size: 0.7rem;
+    }
+
+    .cart-delete-btn {
+      background: #fee9e7;
+      color: #c62828;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+      border: 1px solid #fbc5c2;
+    }
+
+    .cart-delete-btn:hover {
+      background: #fcd9d6;
+      transform: translateY(-2px);
+    }
+
+    .cart-summary {
+      background: #f8fafd;
+      padding: 1.5rem 2rem;
+      border-top: 2px solid #e2ecf5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cart-total {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .cart-total-label {
+      font-weight: 600;
+      color: #1e3e5c;
+      font-size: 1.1rem;
+    }
+
+    .cart-total-value {
+      font-weight: 700;
+      color: #1e4a6d;
+      font-size: 1.5rem;
+    }
+
+    .cart-total-value::after {
+      content: ' RWF';
+      font-size: 1rem;
+      font-weight: 500;
+      color: #6b89a5;
+    }
+
+    .cart-clear-btn {
+      background: white;
+      color: #c62828;
+      border: 2px solid #ffcdd2;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cart-clear-btn:hover {
+      background: #ffebee;
+      transform: translateY(-2px);
+    }
+
+    .cart-empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: #6f8faf;
+    }
+
+    .cart-empty-state i {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      color: #b5c9e0;
+    }
+
+    .cart-empty-state h3 {
+      color: #1e3e5c;
+      margin-bottom: 0.5rem;
+    }
+
+    .edit-form {
+      background: #f8fafd;
+      border-radius: 24px;
+      padding: 2rem;
+      border: 1px solid #e2ecf5;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    .form-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 0.6rem;
+    }
+
+    .form-label i {
+      color: #1e4a6d;
+      width: 20px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      border: 2px solid #e2ecf5;
+      border-radius: 16px;
+      font-size: 1rem;
+      transition: all 0.2s;
+      background: white;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: #1e4a6d;
+      box-shadow: 0 0 0 4px rgba(30, 74, 109, 0.1);
+    }
+
+    .form-control:read-only {
+      background: #f1f5f9;
+      cursor: not-allowed;
+    }
+
+    .form-control:disabled {
+      background: #f1f5f9;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 2px solid #e2ecf5;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      border: none;
+    }
+
+    .btn-primary {
+      background: #1e4a6d;
+      color: white;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #0f3a55;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(30, 74, 109, 0.3);
+    }
+
+    .btn-primary:disabled {
+      background: #a0b8d0;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #1e4a6d;
+      border: 2px solid #e2ecf5;
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: #f8fafd;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    }
+
+    .btn-secondary:disabled {
+      background: #f1f5f9;
+      color: #94a3b8;
+      border-color: #e2ecf5;
+      cursor: not-allowed;
+    }
+
+    .btn-danger {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    .btn-danger:hover:not(:disabled) {
+      background: #fecaca;
+      transform: translateY(-2px);
+    }
+
+    .btn-danger:disabled {
+      background: #f1f5f9;
+      color: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    .activity-list {
+      background: #f8fafd;
+      border-radius: 24px;
+      border: 1px solid #e2ecf5;
+      overflow: hidden;
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid #e2ecf5;
+      transition: background 0.2s;
+    }
+
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+
+    .activity-item:hover {
+      background: white;
+    }
+
+    .activity-icon {
+      width: 48px;
+      height: 48px;
+      background: #e1effa;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1e4a6d;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .activity-details {
+      flex: 1;
+    }
+
+    .activity-title {
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 0.3rem;
+    }
+
+    .activity-time {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .activity-status {
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .status-success {
+      background: #e3f9ee;
+      color: #0d9488;
+    }
+
+    footer {
+      background: #0b2a40;
+      color: #d1dde9;
+      margin-top: 3rem;
+      padding: 3rem 2rem 2rem;
+      border-radius: 40px 40px 0 0;
+    }
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .social-only {
+      display: flex;
+      gap: 2.2rem;
+    }
+    .social-only a {
+      font-size: 2.2rem;
+      color: #cbd5e1;
+      transition: color 0.15s;
+    }
+    .social-only a:hover {
+      color: white;
+      transform: scale(1.05);
+    }
+    .copyright {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #98b1c9;
+      margin-top: 2.5rem;
+      border-top: 1px solid #1f4a6e;
+      padding-top: 1.8rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        height: auto;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .profile-avatar-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .avatar-container {
+        margin-right: 0;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-group.full-width {
+        grid-column: span 1;
+      }
+      .form-actions {
+        flex-direction: column;
+      }
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .cart-summary {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="sticky-nav">
+    <div class="nav-container">
+      <!-- Logo - refined -->
+      <div class="logo-area">
+        <i class="fas fa-shopping-bag logo-icon"></i>
+        <div class="logo-text">GuraNeza<span>BuySmart</span></div>
+      </div>
+
+      <!-- Navigation Links - centered -->
+      <div class="nav-links">
+        <a href="home.html" class="nav-link">
+          <i class="fas fa-home"></i> Home
+        </a>
+        <a href="buy.html" class="nav-link">
+          <i class="fas fa-shopping-cart"></i> Buy
+        </a>
+        <a href="sell.html" class="nav-link">
+          <i class="fas fa-plus-circle"></i> Sell
+        </a>
+        <a href="shops.html" class="nav-link">
+          <i class="fas fa-store"></i> Shops
+        </a>
+      </div>
+
+      <!-- Action Buttons Group -->
+      <div class="action-group">
+        <!-- Let's Shop Icon Button -->
+        <button class="letshop-btn" onclick="window.location.href='letshop.html'" title="Let's Shop">
+          <i class="fas fa-shopping-bag"></i>
+        </button>
+
+        <!-- Cart Icon Button -->
+        <button class="cart-btn" onclick="window.location.href='profile.html'" title="Cart">
+          <i class="fas fa-shopping-basket"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+
+        <!-- Profile Section (Active) -->
+        <div class="profile-section">
+          <div class="profile-dropdown">
+            <button class="profile-btn" onclick="window.location.href='profile.html'" style="background: #e1effa; border-radius: 40px;">
+              <div class="profile-img" id="profileImage">
+                <i class="fas fa-user-circle"></i>
+              </div>
+              <span class="profile-name" id="profileName">Guest</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Three Dots Dropdown with Language Switch -->
+        <div class="dropdown">
+          <button class="dots-btn">
+            <i class="fas fa-ellipsis-v"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="#" id="helpCenterLink"><i class="fas fa-question-circle"></i> Help Center</a>
+            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            <div class="dropdown-divider"></div>
+            <div class="lang-option active" data-lang="en">
+              <i class="fas fa-language"></i> English
+            </div>
+            <div class="lang-option" data-lang="rw">
+              <i class="fas fa-language"></i> Kinyarwanda
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Professional Confirmation Modal -->
+  <div id="confirmModal" class="confirm-modal">
+    <div class="confirm-modal-content">
+      <i class="fas fa-exclamation-triangle"></i>
+      <h3 id="confirmTitle">Confirm Action</h3>
+      <p id="confirmMessage">Are you sure you want to proceed?</p>
+      <div class="confirm-actions">
+        <button class="confirm-btn cancel" id="confirmCancelBtn">Cancel</button>
+        <button class="confirm-btn delete" id="confirmActionBtn">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Overlay -->
+  <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+    <div class="spinner"></div>
+    <p style="margin-top: 1rem; color: #6f8faf;">Loading...</p>
+  </div>
+
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" id="closeModalBtn">&times;</span>
+      <h3>Help Center</h3>
+      <p><i class="fas fa-envelope"></i> <a href="mailto:guranesa@gmail.com">guranesa@gmail.com</a></p>
+      <p><i class="fas fa-phone-alt"></i> +250-789-123-456</p>
+      <p><i class="fas fa-life-ring"></i> <a href="#" id="modalHelpCenter">Frequently Asked Questions</a></p>
+      <p><i class="fab fa-tiktok"></i> <a href="https://tiktok.com/@guranesa" target="_blank">@guranesa</a></p>
+      <p><i class="fab fa-youtube"></i> <a href="https://youtube.com/@guranesa" target="_blank">@guranesa</a></p>
+    </div>
+  </div>
+
+  <main class="container">
+    <div class="profile-header">
+      <h1>
+        <i class="fas fa-user-circle"></i>
+        My Profile
+      </h1>
+    </div>
+
+    <div class="profile-card">
+      <div class="cover-photo"></div>
+
+      <div class="profile-avatar-section">
+        <div class="avatar-container">
+          <div class="profile-avatar" id="profileAvatar" onclick="document.getElementById('avatarUpload').click()">
+            <img id="avatarImage" src="" alt="Profile" style="display: none;">
+            <i class="fas fa-user-circle" id="avatarIcon"></i>
+          </div>
+          <div class="avatar-upload-overlay" onclick="document.getElementById('avatarUpload').click()">
+            <i class="fas fa-camera"></i>
+          </div>
+          <input type="file" id="avatarUpload" accept="image/*">
+        </div>
+        <div class="profile-title">
+          <h2 id="displayUsername">Loading...</h2>
+          <p><i class="fas fa-envelope"></i> <span id="displayEmail">Loading...</span></p>
+          <p><i class="fas fa-phone"></i> <span id="displayPhone">Loading...</span></p>
+          <p><i class="fas fa-map-marker-alt"></i> <span id="displayLocation">Loading...</span></p>
+          <p><i class="fas fa-calendar-alt"></i> Member since <span id="displayJoinDate">Loading...</span></p>
+        </div>
+      </div>
+
+      <div class="profile-content">
+        <!-- Single Stat Card - Products Listed Only -->
+        <div class="stats-single">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-shopping-bag"></i>
+            </div>
+            <div class="stat-value" id="statProducts">0</div>
+            <div class="stat-label">Products Listed</div>
+          </div>
+        </div>
+
+        <!-- My Cart Section -->
+        <div class="cart-section">
+          <h3 class="section-title">
+            <i class="fas fa-shopping-cart"></i>
+            My Cart (<span id="cartItemCount">0</span> items)
+          </h3>
+
+          <div id="cartContainer">
+            <!-- Cart will be dynamically loaded here -->
+          </div>
+        </div>
+
+        <h3 class="section-title">
+          <i class="fas fa-edit"></i>
+          Edit Profile Information
+        </h3>
+
+        <form id="profileForm" class="edit-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">
+                <i class="fas fa-user"></i>
+                Display Name
+              </label>
+              <input type="text" class="form-control" id="displayName" placeholder="Enter display name">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                <i class="fas fa-envelope"></i>
+                Email Address
+              </label>
+              <input type="email" class="form-control" id="email" readonly disabled placeholder="Email from authentication">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                <i class="fas fa-phone"></i>
+                Phone Number
+              </label>
+              <input type="tel" class="form-control" id="phone" placeholder="Enter phone number">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                <i class="fas fa-map-marker-alt"></i>
+                Location
+              </label>
+              <input type="text" class="form-control" id="location" placeholder="Enter your city/location">
+            </div>
+
+            <div class="form-group full-width">
+              <label class="form-label">
+                <i class="fas fa-store"></i>
+                Bio / About Me
+              </label>
+              <textarea class="form-control" id="bio" rows="3" placeholder="Tell us about yourself..."></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" onclick="resetForm()" id="resetBtn">
+              <i class="fas fa-undo"></i>
+              Reset
+            </button>
+            <button type="button" class="btn btn-danger" onclick="deleteAccount()" id="deleteBtn">
+              <i class="fas fa-trash"></i>
+              Delete Account
+            </button>
+            <button type="submit" class="btn btn-primary" id="saveBtn">
+              <i class="fas fa-save"></i>
+              Save Changes
+            </button>
+          </div>
+        </form>
+
+        <h3 class="section-title" style="margin-top: 3rem;">
+          <i class="fas fa-history"></i>
+          Recent Activity
+        </h3>
+
+        <div class="activity-list" id="activityList">
+          <div class="activity-item">
+            <div class="activity-icon">
+              <i class="fas fa-shopping-bag"></i>
+            </div>
+            <div class="activity-details">
+              <div class="activity-title">No recent activity</div>
+              <div class="activity-time">Start exploring products to see your activity here</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand"><p>© 2026 GuraNeza | BuySmart</p></div>
+      <div class="social-only">
+        <a href="https://tiktok.com/@guranesa" target="_blank"><i class="fab fa-tiktok"></i></a>
+        <a href="https://youtube.com/@guranesa" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="X"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+    <div class="copyright"><span>Ikiganiro cyacu: @guranesa • Follow for updates</span></div>
+  </footer>
+
+  <!-- Firebase SDKs -->
+  <script type="module">
+    // Import Firebase modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { 
+      getDatabase, 
+      ref, 
+      set,
+      get,
+      update,
+      remove,
+      push
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import { 
+      getAuth, 
+      onAuthStateChanged,
+      signOut,
+      updateProfile,
+      deleteUser
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAr6-rTa8yQCxr41JjWysFLHeFxH0C2IMI",
+      authDomain: "guraneza-714f7.firebaseapp.com",
+      databaseURL: "https://guraneza-714f7-default-rtdb.firebaseio.com",
+      projectId: "guraneza-714f7",
+      storageBucket: "guraneza-714f7.firebasestorage.app",
+      messagingSenderId: "457107620336",
+      appId: "1:457107620336:web:1583db305b03528fcf5d35"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth(app);
+
+    // ===== GLOBAL VARIABLES =====
+    let currentUser = null;
+    let userProfile = null;
+    let cartItems = []; // Array to store cart items with their Firebase keys
+
+    // ===== DOM ELEMENTS =====
+    const profileImg = document.getElementById('profileImage');
+    const profileName = document.getElementById('profileName');
+    const cartCountSpan = document.getElementById('cartCount');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+
+    // ===== TOAST NOTIFICATION =====
+    function showToast(message, type = 'success', duration = 3000) {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      
+      const icons = {
+        success: 'fa-check-circle',
+        error: 'fa-exclamation-circle',
+        warning: 'fa-exclamation-triangle'
+      };
+      
+      const titles = {
+        success: 'Success!',
+        error: 'Error!',
+        warning: 'Warning!'
+      };
+      
+      toast.innerHTML = `
+        <div class="toast-icon">
+          <i class="fas ${icons[type]}"></i>
+        </div>
+        <div class="toast-content">
+          <div class="toast-title">${titles[type]}</div>
+          <div class="toast-message">${message}</div>
+        </div>
+        <div class="toast-close" onclick="this.parentElement.remove()">
+          <i class="fas fa-times"></i>
+        </div>
+        <div class="toast-progress"></div>
+      `;
+      
+      container.appendChild(toast);
+      
+      setTimeout(() => toast.classList.add('show'), 10);
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+      }, duration);
+    }
+
+    // ===== CONFIRMATION MODAL =====
+    function showConfirmation(title, message) {
+      return new Promise((resolve) => {
+        const modal = document.getElementById('confirmModal');
+        document.getElementById('confirmTitle').textContent = title;
+        document.getElementById('confirmMessage').textContent = message;
+        
+        const confirmBtn = document.getElementById('confirmActionBtn');
+        const cancelBtn = document.getElementById('confirmCancelBtn');
+        
+        const closeModal = () => {
+          modal.classList.remove('active');
+          confirmBtn.removeEventListener('click', confirmHandler);
+          cancelBtn.removeEventListener('click', cancelHandler);
+        };
+        
+        const confirmHandler = () => {
+          closeModal();
+          resolve(true);
+        };
+        
+        const cancelHandler = () => {
+          closeModal();
+          resolve(false);
+        };
+        
+        confirmBtn.addEventListener('click', confirmHandler);
+        cancelBtn.addEventListener('click', cancelHandler);
+        
+        modal.classList.add('active');
+      });
+    }
+
+    // ===== SET LOADING STATE =====
+    function setLoading(isLoading) {
+      const saveBtn = document.getElementById('saveBtn');
+      const resetBtn = document.getElementById('resetBtn');
+      const deleteBtn = document.getElementById('deleteBtn');
+      
+      if (isLoading) {
+        loadingSpinner.style.display = 'block';
+        if (saveBtn) saveBtn.disabled = true;
+        if (resetBtn) resetBtn.disabled = true;
+        if (deleteBtn) deleteBtn.disabled = true;
+      } else {
+        loadingSpinner.style.display = 'none';
+        if (saveBtn) saveBtn.disabled = false;
+        if (resetBtn) resetBtn.disabled = false;
+        if (deleteBtn) deleteBtn.disabled = false;
+      }
+    }
+
+    // ===== UPDATE NAV PROFILE =====
+    function updateNavProfile() {
+      if (currentUser) {
+        profileName.textContent = currentUser.displayName || currentUser.email?.split('@')[0] || 'User';
+        
+        if (userProfile?.profileImage) {
+          profileImg.innerHTML = `<img src="${userProfile.profileImage}" alt="Profile">`;
+          profileImg.style.backgroundImage = 'none';
+        } else {
+          profileImg.innerHTML = '<i class="fas fa-user-circle"></i>';
+          profileImg.style.backgroundImage = '';
+        }
+      } else {
+        profileName.textContent = 'Guest';
+        profileImg.innerHTML = '<i class="fas fa-user-circle"></i>';
+        profileImg.style.backgroundImage = '';
+      }
+    }
+
+    // ===== UPDATE CART COUNT FROM FIREBASE =====
+    async function updateCartCount() {
+      if (!currentUser) {
+        cartCountSpan.textContent = '0';
+        document.getElementById('cartItemCount').textContent = '0';
+        return;
+      }
+
+      try {
+        const cartRef = ref(database, `carts/${currentUser.uid}`);
+        const snapshot = await get(cartRef);
+        
+        if (snapshot.exists()) {
+          const cartData = snapshot.val();
+          cartItems = Object.entries(cartData).map(([key, value]) => ({
+            firebaseKey: key,
+            ...value
+          }));
+          cartCountSpan.textContent = cartItems.length;
+          document.getElementById('cartItemCount').textContent = cartItems.length;
+        } else {
+          cartItems = [];
+          cartCountSpan.textContent = '0';
+          document.getElementById('cartItemCount').textContent = '0';
+        }
+      } catch (error) {
+        console.error('Error loading cart:', error);
+        cartCountSpan.textContent = '0';
+        document.getElementById('cartItemCount').textContent = '0';
+        cartItems = [];
+      }
+    }
+
+    // ===== LOAD USER PROFILE FROM FIREBASE =====
+    async function loadUserProfile() {
+      if (!currentUser) return;
+      
+      setLoading(true);
+      
+      try {
+        const userRef = ref(database, `users/${currentUser.uid}`);
+        const snapshot = await get(userRef);
+        
+        if (snapshot.exists()) {
+          userProfile = snapshot.val();
+        } else {
+          // Create default profile
+          userProfile = {
+            uid: currentUser.uid,
+            email: currentUser.email,
+            displayName: currentUser.displayName || currentUser.email?.split('@')[0] || 'User',
+            phone: '',
+            location: '',
+            bio: '',
+            profileImage: '',
+            joinDate: new Date().toISOString(),
+            stats: {
+              productsListed: 0
+            }
+          };
+          
+          await set(userRef, userProfile);
+        }
+        
+        renderUserProfile();
+        calculateProductsListed();
+        await updateCartCount();
+        renderCart();
+        loadRecentActivity();
+        
+      } catch (error) {
+        console.error('Error loading profile:', error);
+        showToast('Error loading profile', 'error');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    // ===== RENDER USER PROFILE =====
+    function renderUserProfile() {
+      if (!userProfile) return;
+      
+      document.getElementById('displayUsername').textContent = userProfile.displayName || 'User';
+      document.getElementById('displayEmail').textContent = userProfile.email || 'No email';
+      document.getElementById('displayPhone').textContent = userProfile.phone || 'Not provided';
+      document.getElementById('displayLocation').textContent = userProfile.location || 'Not provided';
+      
+      const joinDate = userProfile.joinDate ? new Date(userProfile.joinDate).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      }) : 'Unknown';
+      document.getElementById('displayJoinDate').textContent = joinDate;
+      
+      document.getElementById('displayName').value = userProfile.displayName || '';
+      document.getElementById('email').value = userProfile.email || '';
+      document.getElementById('phone').value = userProfile.phone || '';
+      document.getElementById('location').value = userProfile.location || '';
+      document.getElementById('bio').value = userProfile.bio || '';
+      
+      if (userProfile.profileImage) {
+        document.getElementById('avatarImage').src = userProfile.profileImage;
+        document.getElementById('avatarImage').style.display = 'block';
+        document.getElementById('avatarIcon').style.display = 'none';
+      } else {
+        document.getElementById('avatarImage').style.display = 'none';
+        document.getElementById('avatarIcon').style.display = 'block';
+      }
+      
+      updateNavProfile();
+    }
+
+    // ===== CALCULATE PRODUCTS LISTED ONLY =====
+    async function calculateProductsListed() {
+      try {
+        // Get products listed by user
+        const productsRef = ref(database, 'products');
+        const productsSnapshot = await get(productsRef);
+        let userProducts = 0;
+        
+        if (productsSnapshot.exists()) {
+          const products = productsSnapshot.val();
+          userProducts = Object.values(products).filter(p => 
+            p.shopId && p.shopId.includes(currentUser?.uid) || 
+            p.postedBy === currentUser?.uid || 
+            p.postedByEmail === currentUser?.email
+          ).length;
+        }
+        
+        document.getElementById('statProducts').textContent = userProducts;
+        
+      } catch (error) {
+        console.error('Error calculating products listed:', error);
+      }
+    }
+
+    // ===== RENDER CART =====
+    function renderCart() {
+      const cartContainer = document.getElementById('cartContainer');
+      
+      if (cartItems.length === 0) {
+        cartContainer.innerHTML = `
+          <div class="cart-empty-state">
+            <i class="fas fa-shopping-cart"></i>
+            <h3>Your cart is empty</h3>
+            <p>Start shopping to add items to your cart</p>
+          </div>
+        `;
+        return;
+      }
+
+      // Calculate total
+      const total = cartItems.reduce((sum, item) => sum + (item.price || 0), 0);
+
+      cartContainer.innerHTML = `
+        <div class="cart-table-container">
+          <table class="cart-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Seller</th>
+                <th>Price</th>
+                <th>Added</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${cartItems.map((item, index) => {
+                // Get first image
+                let imageUrl = 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&auto=format';
+                if (item.images && item.images.length > 0) {
+                  imageUrl = item.images[0];
+                } else if (item.images && typeof item.images === 'object') {
+                  // Handle images object structure
+                  const firstImage = Object.values(item.images)[0];
+                  if (firstImage) imageUrl = firstImage;
+                } else if (item.image1) {
+                  imageUrl = item.image1;
+                }
+                
+                return `
+                  <tr data-cart-key="${item.firebaseKey}">
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div class="cart-product-image" style="background-image: url('${imageUrl}')"></div>
+                        <div class="cart-product-info">
+                          <span class="cart-product-name">${item.name}</span>
+                          <span class="cart-product-category">
+                            <i class="fas fa-folder"></i> ${item.category || 'Uncategorized'}
+                          </span>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="cart-seller-info">
+                        <span class="cart-seller-name">
+                          <i class="fas fa-store"></i> ${item.shopName || 'Unknown Shop'}
+                        </span>
+                        ${item.shopLocation ? `
+                          <span style="display: flex; align-items: center; gap: 4px; font-size: 0.75rem; color: #6b89a5;">
+                            <i class="fas fa-map-marker-alt"></i> ${item.shopLocation}
+                          </span>
+                        ` : ''}
+                      </div>
+                    </td>
+                    <td>
+                      <span class="cart-price">${Number(item.price).toLocaleString()}</span>
+                    </td>
+                    <td>
+                      <span class="cart-added-date">
+                        <i class="far fa-clock"></i>
+                        ${new Date(item.addedAt).toLocaleDateString()}
+                      </span>
+                    </td>
+                    <td>
+                      <button class="cart-delete-btn" onclick="window.removeFromCart('${item.firebaseKey}')">
+                        <i class="fas fa-trash"></i> Remove
+                      </button>
+                    </td>
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          </table>
+          <div class="cart-summary">
+            <div class="cart-total">
+              <span class="cart-total-label">Total:</span>
+              <span class="cart-total-value">${total.toLocaleString()}</span>
+            </div>
+            <button class="cart-clear-btn" onclick="window.clearCart()">
+              <i class="fas fa-trash-alt"></i> Clear Cart
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // ===== REMOVE FROM CART =====
+    window.removeFromCart = async function(firebaseKey) {
+      if (!currentUser) return;
+      
+      const confirmed = await showConfirmation(
+        'Remove Item',
+        'Are you sure you want to remove this item from your cart?'
+      );
+      
+      if (confirmed) {
+        setLoading(true);
+        
+        try {
+          const cartItemRef = ref(database, `carts/${currentUser.uid}/${firebaseKey}`);
+          await remove(cartItemRef);
+          
+          // Update local cart items
+          cartItems = cartItems.filter(item => item.firebaseKey !== firebaseKey);
+          
+          // Update UI
+          await updateCartCount();
+          renderCart();
+          loadRecentActivity();
+          
+          showToast('Item removed from cart', 'success');
+          
+        } catch (error) {
+          console.error('Error removing from cart:', error);
+          showToast('Error removing item from cart', 'error');
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    // ===== CLEAR CART =====
+    window.clearCart = async function() {
+      if (!currentUser || cartItems.length === 0) return;
+      
+      const confirmed = await showConfirmation(
+        'Clear Cart',
+        'Are you sure you want to remove all items from your cart?'
+      );
+      
+      if (confirmed) {
+        setLoading(true);
+        
+        try {
+          const cartRef = ref(database, `carts/${currentUser.uid}`);
+          await remove(cartRef);
+          
+          // Clear local cart items
+          cartItems = [];
+          
+          // Update UI
+          await updateCartCount();
+          renderCart();
+          loadRecentActivity();
+          
+          showToast('Cart cleared successfully', 'success');
+          
+        } catch (error) {
+          console.error('Error clearing cart:', error);
+          showToast('Error clearing cart', 'error');
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    // ===== LOAD RECENT ACTIVITY =====
+    function loadRecentActivity() {
+      const activityList = document.getElementById('activityList');
+      const activities = [];
+      
+      try {
+        // Get cart activities
+        cartItems
+          .sort((a, b) => new Date(b.addedAt) - new Date(a.addedAt))
+          .slice(0, 3)
+          .forEach(item => {
+            activities.push({
+              icon: 'fa-shopping-cart',
+              title: `Added "${item.name}" to cart`,
+              time: new Date(item.addedAt).toLocaleString(),
+              status: 'success',
+              statusText: 'In cart'
+            });
+          });
+        
+        activities.sort((a, b) => new Date(b.time) - new Date(a.time));
+        
+        if (activities.length > 0) {
+          activityList.innerHTML = activities.slice(0, 5).map(activity => `
+            <div class="activity-item">
+              <div class="activity-icon">
+                <i class="fas ${activity.icon}"></i>
+              </div>
+              <div class="activity-details">
+                <div class="activity-title">${activity.title}</div>
+                <div class="activity-time">
+                  <i class="far fa-clock"></i>
+                  ${activity.time}
+                </div>
+              </div>
+              <div class="activity-status status-success">
+                ${activity.statusText}
+              </div>
+            </div>
+          `).join('');
+        } else {
+          activityList.innerHTML = `
+            <div class="activity-item">
+              <div class="activity-icon">
+                <i class="fas fa-shopping-bag"></i>
+              </div>
+              <div class="activity-details">
+                <div class="activity-title">No recent activity</div>
+                <div class="activity-time">Start exploring products to see your activity here</div>
+              </div>
+            </div>
+          `;
+        }
+      } catch (e) {
+        console.error('Error loading activity:', e);
+      }
+    }
+
+    // ===== HANDLE AVATAR UPLOAD =====
+    async function handleAvatarUpload(event) {
+      const file = event.target.files[0];
+      if (file && currentUser) {
+        const reader = new FileReader();
+        reader.onload = async function(e) {
+          const imageData = e.target.result;
+          
+          setLoading(true);
+          
+          try {
+            // Update profile in Firebase
+            const userRef = ref(database, `users/${currentUser.uid}`);
+            await update(userRef, { profileImage: imageData });
+            
+            // Update local
+            userProfile.profileImage = imageData;
+            
+            // Update UI
+            document.getElementById('avatarImage').src = imageData;
+            document.getElementById('avatarImage').style.display = 'block';
+            document.getElementById('avatarIcon').style.display = 'none';
+            
+            updateNavProfile();
+            showToast('Profile picture updated!', 'success');
+            
+          } catch (error) {
+            console.error('Error updating avatar:', error);
+            showToast('Error updating profile picture', 'error');
+          } finally {
+            setLoading(false);
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // ===== SAVE PROFILE CHANGES =====
+    async function saveProfileChanges(e) {
+      e.preventDefault();
+      
+      if (!currentUser) return;
+      
+      const displayName = document.getElementById('displayName').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const location = document.getElementById('location').value.trim();
+      const bio = document.getElementById('bio').value.trim();
+      
+      if (!displayName) {
+        showToast('Display name is required', 'error');
+        return;
+      }
+      
+      setLoading(true);
+      
+      try {
+        // Update Firebase Auth profile
+        await updateProfile(currentUser, {
+          displayName: displayName
+        });
+        
+        // Update Firebase Database profile
+        const userRef = ref(database, `users/${currentUser.uid}`);
+        const updates = {
+          displayName: displayName,
+          phone: phone,
+          location: location,
+          bio: bio
+        };
+        
+        await update(userRef, updates);
+        
+        // Update local
+        userProfile = { ...userProfile, ...updates };
+        
+        // Update UI
+        document.getElementById('displayUsername').textContent = displayName;
+        document.getElementById('displayPhone').textContent = phone || 'Not provided';
+        document.getElementById('displayLocation').textContent = location || 'Not provided';
+        
+        updateNavProfile();
+        showToast('Profile updated successfully!', 'success');
+        
+      } catch (error) {
+        console.error('Error saving profile:', error);
+        showToast('Error saving profile: ' + error.message, 'error');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    // ===== RESET FORM =====
+    window.resetForm = function() {
+      if (confirm('Reset all changes to original values?')) {
+        renderUserProfile();
+        showToast('Form reset', 'warning');
+      }
+    };
+
+    // ===== DELETE ACCOUNT =====
+    window.deleteAccount = async function() {
+      const confirmed = await showConfirmation(
+        'Delete Account',
+        'This will permanently delete your account and all your data. This action cannot be undone!'
+      );
+      
+      if (confirmed && currentUser) {
+        setLoading(true);
+        
+        try {
+          // Delete user cart
+          const cartRef = ref(database, `carts/${currentUser.uid}`);
+          await remove(cartRef);
+          
+          // Delete user data from database
+          const userRef = ref(database, `users/${currentUser.uid}`);
+          await remove(userRef);
+          
+          // Delete the user account
+          await deleteUser(currentUser);
+          
+          showToast('Account deleted successfully', 'success');
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 1500);
+        } catch (error) {
+          console.error('Error deleting account:', error);
+          showToast('Error deleting account: ' + error.message, 'error');
+          setLoading(false);
+        }
+      }
+    };
+
+    // ===== AUTHENTICATION STATE =====
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        currentUser = user;
+        updateNavProfile();
+        loadUserProfile();
+      } else {
+        // Redirect to login
+        window.location.href = 'index.html';
+      }
+    });
+
+    // ===== LOGOUT =====
+    document.getElementById('logoutBtn').addEventListener('click', async (e) => {
+      e.preventDefault();
+      try {
+        await signOut(auth);
+        showToast('Logged out successfully');
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1500);
+      } catch (error) {
+        console.error('Logout error:', error);
+        showToast('Error logging out', 'error');
+      }
+    });
+
+    // ===== INITIALIZATION =====
+    document.addEventListener('DOMContentLoaded', function() {
+      
+      // Form submission
+      document.getElementById('profileForm').addEventListener('submit', saveProfileChanges);
+      
+      // Avatar upload
+      document.getElementById('avatarUpload').addEventListener('change', handleAvatarUpload);
+      
+      // Modal functionality
+      const modal = document.getElementById('contactModal');
+      const helpLink = document.getElementById('helpCenterLink');
+      const closeBtn = document.getElementById('closeModalBtn');
+      
+      if (helpLink) {
+        helpLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          modal.classList.add('active');
+        });
+      }
+      
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+          modal.classList.remove('active');
+        });
+      }
+      
+      window.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+        }
+      });
+      
+      document.getElementById('modalHelpCenter').addEventListener('click', function(e) {
+        e.preventDefault();
+        showToast('FAQ page coming soon', 'warning');
+      });
+
+      // Language toggle
+      const langOptions = document.querySelectorAll('.lang-option');
+      
+      function setLanguage(lang) {
+        localStorage.setItem('guraneza_lang', lang);
+        langOptions.forEach(opt => {
+          if (opt.dataset.lang === lang) {
+            opt.classList.add('active');
+          } else {
+            opt.classList.remove('active');
+          }
+        });
+      }
+      
+      const savedLang = localStorage.getItem('guraneza_lang') || 'en';
+      setLanguage(savedLang);
+      
+      langOptions.forEach(opt => {
+        opt.addEventListener('click', () => setLanguage(opt.dataset.lang));
+      });
+    });
+  </script>
+</body>
+</html>
