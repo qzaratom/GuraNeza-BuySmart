@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GuraNeza · Sign In / Sign Up</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="gn.png">
+    <link rel="shortcut icon" href="gn.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { 
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh; color: #ffffff; line-height: 1.4;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; padding: 1rem;
+        }
+        body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=2070&auto=format&fit=crop') center/cover; opacity: 0.1; z-index: -1; animation: slowPan 40s infinite alternate; }
+        body::after { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 50% 50%, rgba(255, 107, 53, 0.03) 0%, rgba(26, 26, 46, 0.2) 100%); z-index: -1; }
+        @keyframes slowPan { from { transform: scale(1) translateX(0); } to { transform: scale(1.1) translateX(-1%); } }
+
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 107, 53, 0.25); border-radius: 10px; }
+        * { scrollbar-width: thin; scrollbar-color: rgba(255, 107, 53, 0.25) rgba(255, 255, 255, 0.02); }
+
+        /* Language Toggle */
+        .lang-toggle-btn { position: fixed; top: 20px; right: 20px; width: 44px; height: 44px; background: rgba(26, 26, 46, 0.6); backdrop-filter: blur(10px); border-radius: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid rgba(255, 107, 53, 0.2); color: #FF6B35; font-size: 1.1rem; transition: all 0.2s; z-index: 100; }
+        .lang-toggle-btn:hover { transform: scale(1.05); background: rgba(255, 107, 53, 0.15); }
+
+        .lang-drawer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(6px); z-index: 200; visibility: hidden; opacity: 0; transition: opacity 0.2s ease, visibility 0.2s; }
+        .lang-drawer-overlay.active { visibility: visible; opacity: 1; }
+        .lang-drawer { position: fixed; top: 0; right: -280px; width: 260px; height: 100%; background: rgba(26, 26, 46, 0.95); backdrop-filter: blur(20px); box-shadow: -4px 0 30px rgba(0,0,0,0.3); z-index: 250; padding: 1.5rem 1rem; transition: right 0.25s ease; display: flex; flex-direction: column; border-left: 1px solid rgba(255, 107, 53, 0.2); }
+        .lang-drawer.active { right: 0; }
+        .lang-drawer-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255, 107, 53, 0.15); padding-bottom: 1rem; }
+        .lang-drawer-header i { font-size: 1.3rem; color: #FF6B35; }
+        .lang-drawer-header h3 { font-weight: 600; color: white; font-size: 0.95rem; }
+        .lang-drawer-item { display: flex; align-items: center; gap: 0.8rem; padding: 0.7rem 0.8rem; color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.85rem; border-radius: 10px; transition: all 0.15s; cursor: pointer; }
+        .lang-drawer-item i { width: 20px; color: #FF6B35; font-size: 1rem; }
+        .lang-drawer-item:hover { background: rgba(255, 107, 53, 0.15); color: white; }
+        .lang-drawer-item.active { background: rgba(255, 107, 53, 0.2); color: #FF6B35; font-weight: 600; }
+        .close-drawer { position: absolute; top: 1rem; left: 1rem; font-size: 1.2rem; color: rgba(255,255,255,0.5); cursor: pointer; transition: color 0.2s; }
+        .close-drawer:hover { color: #FF6B35; }
+
+        /* Toast */
+        .toast-container { position: fixed; top: 20px; right: 20px; z-index: 300; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
+        .toast { background: rgba(26, 26, 46, 0.95); backdrop-filter: blur(16px); border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.3); padding: 12px 16px; min-width: 260px; transform: translateX(120%); transition: transform 0.25s ease; display: flex; align-items: center; gap: 10px; pointer-events: auto; border: 1px solid rgba(255, 107, 53, 0.2); }
+        .toast.show { transform: translateX(0); }
+        .toast-icon { width: 28px; height: 28px; border-radius: 8px; background: #FF6B35; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem; flex-shrink: 0; }
+        .toast.error .toast-icon { background: #ef4444; }
+        .toast-content { flex: 1; }
+        .toast-title { font-weight: 600; color: white; margin-bottom: 2px; font-size: 0.8rem; }
+        .toast-message { color: rgba(255, 255, 255, 0.7); font-size: 0.7rem; }
+        .toast-close { color: rgba(255, 255, 255, 0.5); cursor: pointer; font-size: 0.8rem; }
+
+        .spinner-sm { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.3); border-radius: 50%; border-top-color: white; animation: spin 1s ease-in-out infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Main Container - COMPACT */
+        .auth-container { max-width: 850px; width: 100%; background: rgba(26, 26, 46, 0.45); backdrop-filter: blur(20px) saturate(160%); border-radius: 24px; box-shadow: 0 30px 60px rgba(0,0,0,0.4); overflow: hidden; display: flex; border: 1px solid rgba(255, 107, 53, 0.2); animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Brand Panel - COMPACT */
+        .brand-panel { background: linear-gradient(145deg, rgba(255, 107, 53, 0.15) 0%, rgba(255, 69, 0, 0.08) 100%); padding: 1.5rem; display: flex; flex-direction: column; position: relative; overflow: hidden; color: white; width: 45%; }
+        .brand-panel::before { content: ''; position: absolute; top: -30%; right: -30%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255, 107, 53, 0.08) 0%, transparent 70%); }
+        .brand-content { position: relative; z-index: 2; }
+        .brand-logo { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
+        .logo-icon-img { width: 40px; height: 40px; object-fit: contain; filter: drop-shadow(0 4px 12px rgba(255, 107, 53, 0.3)); }
+        .logo-text h1 { font-size: 1.3rem; font-weight: 700; }
+        .logo-text span { color: #FF6B35; font-weight: 500; font-size: 0.65rem; letter-spacing: 0.5px; }
+        .slogan-badge { background: rgba(255, 107, 53, 0.12); padding: 0.3rem 0.8rem; border-radius: 50px; display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.7rem; color: #FF6B35; border: 1px solid rgba(255, 107, 53, 0.2); margin-bottom: 1rem; width: fit-content; }
+        .brand-quote h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem; line-height: 1.3; }
+        .brand-quote p { font-size: 0.72rem; opacity: 0.8; margin-bottom: 1rem; }
+        .brand-features { display: flex; flex-direction: column; gap: 0.4rem; }
+        .feature-item { display: flex; align-items: center; gap: 0.5rem; }
+        .feature-item i { width: 1.3rem; height: 1.3rem; background: rgba(255, 107, 53, 0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FF6B35; font-size: 0.6rem; }
+        .feature-item span { font-size: 0.72rem; font-weight: 500; }
+
+        /* Forms Panel - COMPACT */
+        .forms-panel { background: transparent; padding: 1.5rem; display: flex; align-items: center; width: 55%; }
+        .forms-container { width: 100%; max-width: 350px; margin: 0 auto; }
+
+        .toggle-container { display: flex; gap: 0.4rem; margin-bottom: 1rem; background: rgba(0,0,0,0.15); padding: 0.25rem; border-radius: 40px; border: 1px solid rgba(255, 107, 53, 0.15); }
+        .toggle-btn { flex: 1; padding: 0.45rem 0.4rem; border: none; background: transparent; border-radius: 40px; font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.6); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.25rem; }
+        .toggle-btn.active { background: #FF6B35; color: white; box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3); }
+        .toggle-btn i { font-size: 0.7rem; }
+
+        .auth-form { display: none; animation: slideIn 0.3s ease; }
+        .auth-form.active { display: block; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: translateX(0); } }
+        .form-title { font-size: 1.15rem; font-weight: 650; color: white; margin-bottom: 0.1rem; }
+        .form-subtitle { color: rgba(255,255,255,0.5); margin-bottom: 0.8rem; font-size: 0.7rem; }
+
+        .form-group { margin-bottom: 0.55rem; position: relative; }
+        .form-group label { display: flex; align-items: center; gap: 0.25rem; font-weight: 500; color: rgba(255,255,255,0.85); margin-bottom: 0.2rem; font-size: 0.7rem; }
+        .form-group label i { color: #FF6B35; width: 12px; font-size: 0.65rem; }
+        .input-wrapper { position: relative; }
+        .input-wrapper > i:first-child { position: absolute; left: 0.7rem; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.4); font-size: 0.7rem; }
+        .input-wrapper input { width: 100%; padding: 0.5rem 0.7rem 0.5rem 2.2rem; background: rgba(0,0,0,0.2); border: 1px solid rgba(255, 107, 53, 0.2); border-radius: 35px; font-size: 0.72rem; color: white; outline: none; transition: all 0.15s; }
+        .input-wrapper input:focus { border-color: #FF6B35; }
+        .input-wrapper input::placeholder { color: rgba(255,255,255,0.3); font-size: 0.65rem; }
+        .password-toggle { position: absolute; right: 0.7rem; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.4); cursor: pointer; font-size: 0.65rem; transition: color 0.15s; }
+        .password-toggle:hover { color: #FF6B35; }
+        .forgot-password { text-align: right; margin-top: 0.15rem; }
+        .forgot-password a { color: #FF6B35; text-decoration: none; font-size: 0.65rem; font-weight: 500; }
+
+        .terms-group { display: flex; align-items: center; gap: 0.4rem; margin: 0.5rem 0; }
+        .terms-group input[type="checkbox"] { width: 13px; height: 13px; accent-color: #FF6B35; }
+        .terms-group label { font-size: 0.65rem; color: rgba(255,255,255,0.6); }
+        .terms-group a { color: #FF6B35; text-decoration: none; font-weight: 500; }
+
+        .submit-btn { width: 100%; padding: 0.6rem; background: #FF6B35; color: white; border: none; border-radius: 40px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.4rem; box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3); margin-top: 0.6rem; }
+        .submit-btn:hover:not(:disabled) { transform: translateY(-1px); background: #ff7a4a; }
+        .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .auth-footer { text-align: center; margin-top: 0.6rem; font-size: 0.65rem; color: rgba(255,255,255,0.5); }
+        .auth-footer a { color: #FF6B35; text-decoration: none; font-weight: 500; cursor: pointer; }
+        .auth-footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 700px) { 
+            .auth-container { flex-direction: column; max-width: 420px; } 
+            .brand-panel, .forms-panel { width: 100%; } 
+            .brand-panel { padding: 1.2rem; } 
+            .forms-panel { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <button class="lang-toggle-btn" id="langToggleBtn"><i class="fas fa-language"></i></button>
+
+    <div class="lang-drawer-overlay" id="langDrawerOverlay"></div>
+    <div class="lang-drawer" id="langDrawer">
+        <div class="lang-drawer-header"><i class="fas fa-language"></i><h3 data-i18n="selectLanguage">Select Language</h3></div>
+        <div class="lang-drawer-item lang-option" data-lang="en"><i class="fas fa-globe"></i> English</div>
+        <div class="lang-drawer-item lang-option" data-lang="fr"><i class="fas fa-globe"></i> Français</div>
+        <div class="lang-drawer-item lang-option" data-lang="rw"><i class="fas fa-globe"></i> Kinyarwanda</div>
+        <div class="close-drawer" id="closeDrawerBtn"><i class="fas fa-times"></i></div>
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+
+    <div class="auth-container">
+        <div class="brand-panel">
+            <div class="brand-content">
+                <div class="brand-logo"><img src="gn.png" alt="GuraNeza" class="logo-icon-img"><div class="logo-text"><h1 data-i18n="guraneza">GuraNeza</h1><span data-i18n="buySmart">| BuySmart</span></div></div>
+                <div class="slogan-badge"><i class="fas fa-tag"></i> <span data-i18n="tagline">Buy Smart. Sell Easy.</span></div>
+                <div class="brand-quote"><h2 data-i18n="marketplaceDesc">Rwanda's trusted marketplace</h2><p data-i18n="joinDescription">Join thousands of buyers and sellers connecting daily.</p></div>
+                <div class="brand-features">
+                    <div class="feature-item"><i class="fas fa-check-circle"></i><span data-i18n="featureVerified">Verified sellers & shops</span></div>
+                    <div class="feature-item"><i class="fas fa-handshake"></i><span data-i18n="featureNegotiate">Negotiate prices directly</span></div>
+                    <div class="feature-item"><i class="fas fa-shield-alt"></i><span data-i18n="featureSecure">Secure & easy transactions</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="forms-panel">
+            <div class="forms-container">
+                <div class="toggle-container">
+                    <button class="toggle-btn active" id="loginToggle" onclick="window.authUI.showForm('login')"><i class="fas fa-sign-in-alt"></i> <span data-i18n="signIn">Sign In</span></button>
+                    <button class="toggle-btn" id="registerToggle" onclick="window.authUI.showForm('register')"><i class="fas fa-user-plus"></i> <span data-i18n="signUp">Sign Up</span></button>
+                </div>
+
+                <div class="auth-form active" id="loginForm">
+                    <h2 class="form-title" data-i18n="welcomeBack">Welcome back</h2>
+                    <p class="form-subtitle" data-i18n="signInSubtitle">Sign in to your account</p>
+                    <form id="loginFormElement">
+                        <div class="form-group"><label><i class="fas fa-envelope"></i> <span data-i18n="email">Email</span></label><div class="input-wrapper"><i class="fas fa-envelope"></i><input type="email" id="loginEmail" data-i18n-placeholder="emailPlaceholder" placeholder="you@example.com" required></div></div>
+                        <div class="form-group"><label><i class="fas fa-lock"></i> <span data-i18n="password">Password</span></label><div class="input-wrapper"><i class="fas fa-lock"></i><input type="password" id="loginPassword" data-i18n-placeholder="passwordPlaceholder" placeholder="••••••••" required><i class="fas fa-eye password-toggle" onclick="window.authUI.togglePassword('loginPassword', this)"></i></div><div class="forgot-password"><a href="#" id="forgotPasswordLink" data-i18n="forgotPassword">Forgot password?</a></div></div>
+                        <button type="submit" class="submit-btn" id="loginBtn"><i class="fas fa-sign-in-alt"></i> <span data-i18n="signIn">Sign In</span></button>
+                    </form>
+                    <div class="auth-footer"><span data-i18n="noAccount">Don't have an account?</span> <a href="#" onclick="window.authUI.showForm('register'); return false;" data-i18n="signUp">Sign up</a></div>
+                </div>
+
+                <div class="auth-form" id="registerForm">
+                    <h2 class="form-title" data-i18n="createAccount">Create account</h2>
+                    <p class="form-subtitle" data-i18n="joinCommunity">Join our community</p>
+                    <form id="registerFormElement">
+                        <div class="form-group"><label><i class="fas fa-user"></i> <span data-i18n="username">Username</span></label><div class="input-wrapper"><i class="fas fa-user"></i><input type="text" id="regUsername" data-i18n-placeholder="usernamePlaceholder" placeholder="e.g. jean_mugabo" required></div></div>
+                        <div class="form-group"><label><i class="fas fa-envelope"></i> <span data-i18n="email">Email</span></label><div class="input-wrapper"><i class="fas fa-envelope"></i><input type="email" id="regEmail" data-i18n-placeholder="emailPlaceholder" placeholder="you@example.com" required></div></div>
+                        <div class="form-group"><label><i class="fas fa-lock"></i> <span data-i18n="password">Password</span></label><div class="input-wrapper"><i class="fas fa-lock"></i><input type="password" id="regPassword" data-i18n-placeholder="passwordMinPlaceholder" placeholder="Min. 6 characters" required><i class="fas fa-eye password-toggle" onclick="window.authUI.togglePassword('regPassword', this)"></i></div></div>
+                        <div class="form-group"><label><i class="fas fa-check-circle"></i> <span data-i18n="confirmPassword">Confirm Password</span></label><div class="input-wrapper"><i class="fas fa-check-circle"></i><input type="password" id="regConfirmPassword" data-i18n-placeholder="confirmPasswordPlaceholder" placeholder="Re-enter password" required><i class="fas fa-eye password-toggle" onclick="window.authUI.togglePassword('regConfirmPassword', this)"></i></div></div>
+                        <div class="terms-group"><input type="checkbox" id="terms" required><label><span data-i18n="agreeTerms">I agree to the</span> <a href="#" data-i18n="terms">Terms</a> <span data-i18n="and">and</span> <a href="#" data-i18n="privacyPolicy">Privacy Policy</a></label></div>
+                        <button type="submit" class="submit-btn" id="registerBtn"><i class="fas fa-user-plus"></i> <span data-i18n="createAccount">Create Account</span></button>
+                    </form>
+                    <div class="auth-footer"><span data-i18n="haveAccount">Already have an account?</span> <a href="#" onclick="window.authUI.showForm('login'); return false;" data-i18n="signIn">Sign in</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, updateProfile } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        const firebaseConfig = { apiKey: "AIzaSyAr6-rTa8yQCxr41JjWysFLHeFxH0C2IMI", authDomain: "guraneza-714f7.firebaseapp.com", databaseURL: "https://guraneza-714f7-default-rtdb.firebaseio.com", projectId: "guraneza-714f7", storageBucket: "guraneza-714f7.firebasestorage.app", messagingSenderId: "457107620336", appId: "1:457107620336:web:1583db305b03528fcf5d35" };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // ===== TRANSLATIONS =====
+        const translations = {
+            en: {
+                selectLanguage: "Select Language", guraneza: "GuraNeza", buySmart: "| BuySmart", tagline: "Buy Smart. Sell Easy.",
+                marketplaceDesc: "Rwanda's trusted marketplace", joinDescription: "Join thousands of buyers and sellers connecting daily.",
+                featureVerified: "Verified sellers & shops", featureNegotiate: "Negotiate prices directly", featureSecure: "Secure & easy transactions",
+                signIn: "Sign In", signUp: "Sign Up", welcomeBack: "Welcome back", signInSubtitle: "Sign in to your account",
+                email: "Email", emailPlaceholder: "you@example.com", password: "Password", passwordPlaceholder: "••••••••",
+                forgotPassword: "Forgot password?", noAccount: "Don't have an account?",
+                createAccount: "Create Account", joinCommunity: "Join our community", username: "Username",
+                usernamePlaceholder: "e.g. jean_mugabo", passwordMinPlaceholder: "Min. 6 characters",
+                confirmPassword: "Confirm Password", confirmPasswordPlaceholder: "Re-enter password",
+                agreeTerms: "I agree to the", terms: "Terms", and: "and", privacyPolicy: "Privacy Policy",
+                haveAccount: "Already have an account?",
+                success: "Success", error: "Error",
+                accountCreated: "Account created successfully! You can now sign in.",
+                registrationFailed: "Registration Failed", emailAlreadyInUse: "This email is already registered. Please sign in.",
+                passwordsNoMatch: "Passwords do not match!", passwordTooShort: "Password must be at least 6 characters",
+                termsRequired: "Please accept the terms and conditions",
+                loginFailed: "Login Failed", invalidCredentials: "Invalid email or password.",
+                userNotFound: "No account found with this email.", wrongPassword: "Incorrect password.",
+                resetEmailSent: "Password reset email sent! Check your inbox.", resetFailed: "Reset Failed",
+                emailRequired: "Please enter your email first", processing: "Processing..."
+            },
+            fr: {
+                selectLanguage: "Choisir la langue", guraneza: "GuraNeza", buySmart: "| BuySmart", tagline: "Achetez malin. Vendez facile.",
+                marketplaceDesc: "Le marché de confiance du Rwanda", joinDescription: "Rejoignez des milliers d'acheteurs et vendeurs.",
+                featureVerified: "Vendeurs vérifiés", featureNegotiate: "Négociez directement", featureSecure: "Transactions sécurisées",
+                signIn: "Connexion", signUp: "Inscription", welcomeBack: "Bon retour", signInSubtitle: "Connectez-vous",
+                email: "Email", emailPlaceholder: "vous@exemple.com", password: "Mot de passe", passwordPlaceholder: "••••••••",
+                forgotPassword: "Mot de passe oublié?", noAccount: "Pas de compte?",
+                createAccount: "Créer un compte", joinCommunity: "Rejoignez la communauté", username: "Nom d'utilisateur",
+                usernamePlaceholder: "ex. jean_mugabo", passwordMinPlaceholder: "Min. 6 caractères",
+                confirmPassword: "Confirmer", confirmPasswordPlaceholder: "Ressaisissez",
+                agreeTerms: "J'accepte les", terms: "Conditions", and: "et", privacyPolicy: "Confidentialité",
+                haveAccount: "Déjà un compte?",
+                success: "Succès", error: "Erreur",
+                accountCreated: "Compte créé! Vous pouvez vous connecter.",
+                registrationFailed: "Échec d'inscription", emailAlreadyInUse: "Cet email existe déjà. Connectez-vous.",
+                passwordsNoMatch: "Les mots de passe ne correspondent pas!", passwordTooShort: "6 caractères minimum",
+                termsRequired: "Veuillez accepter les conditions",
+                loginFailed: "Échec de connexion", invalidCredentials: "Email ou mot de passe invalide.",
+                userNotFound: "Aucun compte trouvé.", wrongPassword: "Mot de passe incorrect.",
+                resetEmailSent: "Email de réinitialisation envoyé!", resetFailed: "Échec",
+                emailRequired: "Entrez votre email", processing: "Traitement..."
+            },
+            rw: {
+                selectLanguage: "Hitamo ururimi", guraneza: "GuraNeza", buySmart: "| BuySmart", tagline: "Gura neza. Gurisha byoroshye.",
+                marketplaceDesc: "Isoko rya Rwanda ryizewe", joinDescription: "Injira mu baguzi n'abagurisha.",
+                featureVerified: "Abagurisha byagenzuwe", featureNegotiate: "Guhana ibiciro", featureSecure: "Ibikorwa byizewe",
+                signIn: "Injira", signUp: "Iyandikishe", welcomeBack: "Murakaza neza", signInSubtitle: "Injira kuri konti",
+                email: "Imeri", emailPlaceholder: "wewe@urugero.com", password: "Ijambobanga", passwordPlaceholder: "••••••••",
+                forgotPassword: "Wibagiwe ijambobanga?", noAccount: "Nta konti?",
+                createAccount: "Fungura konti", joinCommunity: "Injira mu muryango", username: "Izina",
+                usernamePlaceholder: "urug. jean_mugabo", passwordMinPlaceholder: "Byibura 6",
+                confirmPassword: "Emeza ijambobanga", confirmPasswordPlaceholder: "Ongera wandike",
+                agreeTerms: "Nemera", terms: "Amategeko", and: "na", privacyPolicy: "Ibanga",
+                haveAccount: "Ufite konti?",
+                success: "Byaciyemo", error: "Ikosa",
+                accountCreated: "Konti yafunguwe! Urashobora kwinjira.",
+                registrationFailed: "Kwiyandikisha byananiye", emailAlreadyInUse: "Iyi imeri imaze kwiyandikisha.",
+                passwordsNoMatch: "Ijambobanga ntirihuye!", passwordTooShort: "Byibura 6 inyuguti",
+                termsRequired: "Emera amategeko",
+                loginFailed: "Kwinjira byananiye", invalidCredentials: "Imeri cyangwa ijambobanga sibyo.",
+                userNotFound: "Nta konti ibonetse.", wrongPassword: "Ijambobanga ntirikora.",
+                resetEmailSent: "Imeri yoherejwe!", resetFailed: "Byananiye",
+                emailRequired: "Andika imeri yawe", processing: "Tegereza..."
+            }
+        };
+
+        let currentLang = localStorage.getItem('guraneza_lang') || 'en';
+        function t(key) { return translations[currentLang]?.[key] || translations.en[key] || key; }
+        function updateLanguage() {
+            document.querySelectorAll('[data-i18n]').forEach(el => el.textContent = t(el.getAttribute('data-i18n')));
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => el.placeholder = t(el.getAttribute('data-i18n-placeholder')));
+            document.querySelectorAll('.lang-option').forEach(o => o.classList.toggle('active', o.dataset.lang === currentLang));
+        }
+
+        function showToast(title, msg, isError = false) {
+            const c = document.getElementById('toastContainer'), d = document.createElement('div');
+            d.className = `toast ${isError ? 'error' : ''}`;
+            d.innerHTML = `<div class="toast-icon"><i class="fas fa-${isError ? 'exclamation' : 'check'}-circle"></i></div><div class="toast-content"><div class="toast-title">${title}</div><div class="toast-message">${msg}</div></div><div class="toast-close" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></div>`;
+            c.appendChild(d); setTimeout(() => d.classList.add('show'), 10); setTimeout(() => { d.classList.remove('show'); setTimeout(() => d.remove(), 300); }, 3500);
+        }
+
+        const authUI = {
+            showForm(type) {
+                document.getElementById('loginForm').classList.toggle('active', type === 'login');
+                document.getElementById('registerForm').classList.toggle('active', type === 'register');
+                document.getElementById('loginToggle').classList.toggle('active', type === 'login');
+                document.getElementById('registerToggle').classList.toggle('active', type === 'register');
+            },
+            togglePassword(id, icon) {
+                const i = document.getElementById(id);
+                i.type = i.type === 'password' ? 'text' : 'password';
+                icon.classList.toggle('fa-eye');
+                icon.classList.toggle('fa-eye-slash');
+            },
+            setLoading(btnId, loading) {
+                const b = document.getElementById(btnId);
+                b.disabled = loading;
+                const isLogin = btnId === 'loginBtn';
+                b.innerHTML = loading ? '<span class="spinner-sm"></span> ' + t('processing') : (isLogin ? '<i class="fas fa-sign-in-alt"></i> ' + t('signIn') : '<i class="fas fa-user-plus"></i> ' + t('createAccount'));
+            }
+        };
+        window.authUI = authUI;
+
+        // NO auto-redirect on auth state - manual login only
+
+        // Register
+        document.getElementById('registerFormElement').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('regUsername').value.trim(), email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value, confirm = document.getElementById('regConfirmPassword').value;
+            if (password !== confirm) { showToast(t('error'), t('passwordsNoMatch'), true); return; }
+            if (password.length < 6) { showToast(t('error'), t('passwordTooShort'), true); return; }
+            if (!document.getElementById('terms').checked) { showToast(t('error'), t('termsRequired'), true); return; }
+            authUI.setLoading('registerBtn', true);
+            try {
+                const uc = await createUserWithEmailAndPassword(auth, email, password);
+                await updateProfile(uc.user, { displayName: username });
+                showToast(t('success'), t('accountCreated'));
+                document.getElementById('registerFormElement').reset();
+                // Switch to login form instead of auto-redirecting
+                authUI.showForm('login');
+            } catch (err) {
+                let msg = t('registrationFailed');
+                if (err.code === 'auth/email-already-in-use') msg = t('emailAlreadyInUse');
+                showToast(t('registrationFailed'), msg, true);
+            } finally { authUI.setLoading('registerBtn', false); }
+        });
+
+        // Login - NOW REDIRECTS to home
+        document.getElementById('loginFormElement').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim(), password = document.getElementById('loginPassword').value;
+            if (!email || !password) { showToast(t('error'), t('invalidCredentials'), true); return; }
+            authUI.setLoading('loginBtn', true);
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                showToast(t('success'), t('welcomeBack'));
+                setTimeout(() => window.location.href = 'home.html', 1000);
+            } catch (err) {
+                let msg = t('invalidCredentials');
+                if (err.code === 'auth/user-not-found') msg = t('userNotFound');
+                else if (err.code === 'auth/wrong-password') msg = t('wrongPassword');
+                showToast(t('loginFailed'), msg, true);
+            } finally { authUI.setLoading('loginBtn', false); }
+        });
+
+        // Forgot Password
+        document.getElementById('forgotPasswordLink').addEventListener('click', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            if (!email) { showToast(t('error'), t('emailRequired'), true); return; }
+            try { await sendPasswordResetEmail(auth, email); showToast(t('success'), t('resetEmailSent')); }
+            catch (err) { showToast(t('resetFailed'), err.code === 'auth/user-not-found' ? t('userNotFound') : t('error'), true); }
+        });
+
+        // Language drawer
+        const langDrawer = document.getElementById('langDrawer'), langOverlay = document.getElementById('langDrawerOverlay');
+        document.getElementById('langToggleBtn').addEventListener('click', () => { langDrawer.classList.add('active'); langOverlay.classList.add('active'); });
+        document.getElementById('closeDrawerBtn').addEventListener('click', () => { langDrawer.classList.remove('active'); langOverlay.classList.remove('active'); });
+        langOverlay.addEventListener('click', () => { langDrawer.classList.remove('active'); langOverlay.classList.remove('active'); });
+
+        document.querySelectorAll('.lang-option').forEach(o => {
+            o.addEventListener('click', () => {
+                const l = o.dataset.lang;
+                if (l) { currentLang = l; localStorage.setItem('guraneza_lang', l); updateLanguage(); langDrawer.classList.remove('active'); langOverlay.classList.remove('active'); }
+            });
+        });
+
+        // Init language
+        updateLanguage();
+    </script>
+</body>
+</html>
